@@ -2,6 +2,7 @@
 	require "./Config/database.php";
 	require "./app/models/db.php";
 	require "./app/models/products.php";
+	require "./app/models/protypes.php";
 	$product = new Product;
 	$getAllProducts = $product->getAllProducts(); 
 	$getAllTopProducts = $product->getAllTopProducts();
@@ -182,12 +183,11 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>						
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Loudspeaker</a></li>
-						<li><a href="#">Lelevision</a></li>
-						<li><a href="#">Screenshots</a></li>
+						<?php					
+					$protype = new protypes;
+					$getAllProtypes = $protype->getAllProtypes();
+					foreach ($getAllProtypes as $value) { 	?>
+						<li><a href="productOfprotypes.php?type_id=<?php echo $value["type_id"] ?>"><?php echo $value["type_name"] ?></a></li><?php } ?>					
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -293,7 +293,7 @@
 											</div>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+												<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 												<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price'] *30/100 ?></del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -419,7 +419,7 @@
 											</div>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+												<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 												<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price']*30/100 ?></del></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -483,7 +483,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+										<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 										<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price']*30/100 ?></del></h4>
 									</div>
 								</div>
@@ -500,7 +500,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+										<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 										<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price']*30/100 ?></del></h4>
 									</div>
 								</div>
@@ -531,7 +531,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+										<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 										<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price']*30/100 ?></del></h4>
 									</div>
 								</div>
@@ -548,7 +548,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+										<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 										<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price']*30/100 ?></del></h4>
 									</div>
 								</div>
@@ -581,7 +581,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+										<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 										<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price']*30/100 ?></del></h4>
 									</div>
 								</div>
@@ -598,7 +598,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
+										<h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a></h3>
 										<h4 class="product-price"><?php echo $v['price'] ?> <del class="product-old-price"><?php echo $v['price']*30/100 ?></del></h4>
 									</div>
 								</div>
