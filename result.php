@@ -5,16 +5,15 @@
 	require "./app/models/products.php";
 	require "./app/models/protypes.php";
 	require "./app/models/manufactures .php";
-	if(isset($_GET['type_id']))
-	{
-		$id = $_GET['type_id'];
-	}
 	$product = new Product;
 	$protypes = new protypes;
 	$manufactures = new Manufactures;
+	if (isset($_GET['keyword'])){
+		$key = $_GET['keyword'];	
+	}
+	$searchProducts = $product->searchProducts($key);
 	$getAllProducts = $product->getAllProducts(); 
 	$getAllProtypes = $protypes->getAllProtypes();
-	$getProtypeById = $product->getProtypeById($id);
 	$getAllManufactures = $manufactures->getAllManufactures(); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +92,7 @@
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
-                        <form action="result.php" method="get">
+						<form action="result.php" method="get">
                                 <select class="input-select">
                                     <option value="0">All Categories</option>
                                     <?php									
@@ -249,9 +248,9 @@
                                     <label for="<?php echo $v['manu_name'] ?>">
                                         <span></span>
                                         <?php echo $v['manu_name'] ?>
-                                    <?php
+										<?php
 										$a = 0;
-									 	foreach($getProtypeById as $i):
+									 	foreach($searchProducts as $i):
 										if($v['manu_id'] == $i['menu_id']):
 											$a++; ?>
                                         <?php endif; endforeach; ?>
@@ -278,11 +277,12 @@
 
                     <!-- store products -->
                     <div class="row">
-                        <?php 
-						foreach($getProtypeById as $v):	
-						foreach($getAllProtypes as $va):
-						if($v['type_id'] == $va['type_id'] ):					
-						?>
+					<?php
+						
+							foreach ($searchProducts as $v) :
+								foreach($getAllProtypes as $va):
+									if($v['type_id'] == $va['type_id'] ):
+						?>                      
                         <!-- product -->
                         <div class="col-md-4 col-xs-6" style="margin-bottom:50px">
                             <div class="product">
@@ -323,9 +323,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /product -->
-                        <?php endif; endforeach; endforeach; ?>
-
+                        <!-- /product -->                     
+						<?php endif; endforeach; endforeach;  ?>
                         <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 
 
