@@ -113,10 +113,13 @@ session_start();
                         <div class="header-ctn">
                             <!-- Wishlist -->
                             <div>
-                                <a href="#">
+                                <a href="ViewWishlist">
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
-                                    <div class="qty">2</div>
+                                    <?php if(isset($_SESSION['wishlist'])):
+                                    $qty1 = 0; foreach($_SESSION['wishlist'] as $k => $values): ?>
+                                    <div class="qty"><?php echo ++$qty1; ?></div>
+                                    <?php endforeach; endif;?>
                                 </a>
                             </div>
                             <!-- /Wishlist -->
@@ -150,7 +153,7 @@ session_start();
                                                 <h4 class="product-price"><span
                                                         class="qty"><?php echo $values ?>x</span><?php echo ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values  ?></h4>
                                             </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                            <a href="del.php?id=<?php echo $k ?>"><button class="delete"><i class="fa fa-close"></i></button></a> 
                                         </div>
                                         <?php endif; endforeach; endforeach; endif;?>
                                     </div>
@@ -244,7 +247,7 @@ session_start();
 										<th class="goods-page-description">Name product</th>
 										
 										<th class="goods-page-quantity">Quantity</th>
-										<th class="goods-page-price">Unit price</th>
+										<th class="goods-page-price">Old price</th>
 										<th class="goods-page-total" colspan="2">Total</th>
 									</tr>
 										<?php if (isset($_SESSION['cart'])):
@@ -270,13 +273,14 @@ session_start();
 											<strong>$<?php echo number_format($p['price'])  ?> </strong>
 										</td>
 										<td class="goods-page-total">
-										<strong>$<?php echo number_format($p['price']*$value)  ?> </strong>
+										<strong>$<?php echo  number_format(($p['price'] - $p['price'] * number_format($p['discount']) /100) *$values)  ?> </strong>
 										</td>
 										<td class="del-goods-col">
-											<a class="del-goods" href="delViewcart.php?id=<?php echo $key ?>">&nbsp;</a>
+                                        <a href="delViewcart.php?id=<?php echo $key ?>"><button class="delete"><i class="fa fa-close"></i></button></a>
+                                        
 										</td>
 									</tr>
-									<?php endif; endforeach; endforeach; endif; ?>
+									<?php endif; endforeach; endforeach; ?>
 								
 								</table>
 							</div>
@@ -292,7 +296,7 @@ session_start();
                                             if($v['id'] == $k):
                                         $price += ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values;
                                         ?>
-                                         <?php endif; endforeach; endforeach;  ?>
+                                         <?php endif; endforeach; endforeach; endif;  ?>
 										<strong class="price"><span>$</span><?php echo number_format( $price) ?> </strong>
 									</li>
 								</ul>

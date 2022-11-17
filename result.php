@@ -112,10 +112,13 @@
                         <div class="header-ctn">
                             <!-- Wishlist -->
                             <div>
-                                <a href="#">
+                                <a href="ViewWishlist">
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
-                                    <div class="qty">2</div>
+                                    <?php if(isset($_SESSION['wishlist'])):
+                                    $qty1 = 0; foreach($_SESSION['wishlist'] as $k => $values): ?>
+                                    <div class="qty"><?php echo ++$qty1; ?></div>
+                                    <?php endforeach; endif;?>
                                 </a>
                             </div>
                             <!-- /Wishlist -->
@@ -149,7 +152,8 @@
                                                 <h4 class="product-price"><span
                                                         class="qty"><?php echo $values ?>x</span><?php echo ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values  ?></h4>
                                             </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                            <a href="del.php?id=<?php echo $k ?>"><button class="delete"><i class="fa fa-close"></i></button></a> 
+                                            
                                         </div>
                                         <?php endif; endforeach; endforeach; endif;?>
                                     </div>
@@ -308,8 +312,8 @@
                                         <i class="fa fa-star"></i>
                                     </div>
                                     <div class="product-btns">
-                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                class="tooltipp">add to wishlist</span></button>
+                                    <button class="add-to-wishlist"><a href="wishlist.php?id=<?php echo $v['id'] ?>"><i class="fa fa-heart-o"></i><span
+                                                        class="tooltipp">add to wishlist</span></a></button>
                                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span
                                                 class="tooltipp">add to compare</span></button>
                                         <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick

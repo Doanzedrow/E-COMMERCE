@@ -113,10 +113,13 @@ session_start();
                         <div class="header-ctn">
                             <!-- Wishlist -->
                             <div>
-                                <a href="#">
+                                <a href="ViewWishlist">
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
-                                    <div class="qty">2</div>
+                                    <?php if(isset($_SESSION['wishlist'])):
+                                    $qty1 = 0; foreach($_SESSION['wishlist'] as $k => $values): ?>
+                                    <div class="qty"><?php echo ++$qty1; ?></div>
+                                    <?php endforeach; endif;?>
                                 </a>
                             </div>
                             <!-- /Wishlist -->
@@ -151,7 +154,7 @@ session_start();
                                                         class="qty"><?php echo $values ?>x</span><?php echo ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values  ?>
                                                 </h4>
                                             </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                            <a href="del.php?id=<?php echo $k ?>"><button class="delete"><i class="fa fa-close"></i></button></a> 
                                         </div>
                                         <?php endif; endforeach; endforeach; endif;?>
                                     </div>
@@ -297,7 +300,7 @@ session_start();
                     </div>
                     <?php endforeach; ?>
                     <ul class="product-btns">
-                        <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                        <li><a href="wishlist.php?id=<?php echo $v['id'] ?>"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
                         <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
                     </ul>
                     <?php 

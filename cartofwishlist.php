@@ -17,4 +17,4 @@ if(isset($_GET['id'])):
     endif;
     endif;
 endif;
-header('location:index.php');
+header('location:ViewWishlist.php');
