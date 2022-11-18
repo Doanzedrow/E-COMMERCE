@@ -1,10 +1,30 @@
+<?php session_start();
+require "../Config/database.php";
+require "../app/models/db.php"; 
+require "../app/models/user.php";
+$user = new User;
+if(isset($_POST['btn-dangnhap']))
+{
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    if($user->checklogin($username,$password))
+    {
+        $_SESSION['user'] = $username;
+        header('location:../index.php');
+    }
+    else
+    {
+        header('location:./login/indexlogin.php');
+    }
+}
+?>
 <!DOCTYPE html>
  <html lang="en">
  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Tạo Trang Login</title>
-     <link type="text/css" rel="stylesheet" href="css/stylelogin.css"/>
+     <link type="text/css" rel="stylesheet" href="../css/stylelogin.css"/>
      <link rel="preconnect" href="https://fonts.gstatic.com">
      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,7 +53,7 @@
                      <label><input type="checkbox" name=""> Nhớ Đăng Nhập</label>
                  </div>
                  <div class="input-form">
-                     <input type="submit" value="Đăng Nhập">
+                     <input type="submit" value="Đăng Nhập" name="btn-dangnhap">
                  </div>
                  <div class="input-form">
                      <p>Bạn Chưa Có Tài Khoản? <a href="register.php">Đăng Ký</a></p>
