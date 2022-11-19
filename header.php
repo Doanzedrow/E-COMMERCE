@@ -1,4 +1,5 @@
 <?php 
+session_start();
 	require "./Config/database.php";
 	require "./app/models/db.php";
 	require "./app/models/products.php";
@@ -12,9 +13,6 @@
     $get3HotTop6Products = $product->get3HotTop6Products();
     $get5TopSellingProducts = $product->get5TopSellingProducts();
 	?>
-<?php session_start();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,19 +42,19 @@
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="css/style.css" />
-
+    <link type="text/css" rel="stylesheet" href="css/styledrop.css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-        <!-- Theme styles START -->
-<link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
-	<!-- Theme styles END -->
-	<!-- Global styles START -->
-	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<!-- Global styles END -->
+    <!-- Theme styles START -->
+    <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+    <!-- Theme styles END -->
+    <!-- Global styles START -->
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Global styles END -->
 
 </head>
 
@@ -73,7 +71,31 @@
                 </ul>
                 <ul class="header-links pull-right">
                     <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                    <li><a href="./login/indexlogin.php"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li>
+                        
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-user-o"></i>
+                                <?php 
+                                    if(isset($_SESSION['user']))
+                                    {
+                                        echo "Xin chào " . $_SESSION['user']; 
+                                    }
+                                    else
+                                    {
+                                        echo "My Account ";
+                                    } 
+                                ?>
+                            </a>
+                            <div class="noidung_dropdown">
+                                <?php if(isset($_SESSION['user'])): ?>                              
+                                <a href="./logout/logout.php">Logout</a>                             
+                               <?php else: ?>
+                                    <a href="./login/login.php">Login</a>                                
+                                <?php  endif;?>                                                                
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -88,8 +110,8 @@
                     <!-- LOGO -->
                     <div class="col-md-3">
                         <div class="header-logo">
-                            <a href="#" class="logo">
-                                <img src="./img/logonhom8.jpg" alt="">
+                            <a href="index.php" class="logo">
+                                <img src="./img/nhom8.jpg" alt="" style="width:230px;">
                             </a>
                         </div>
                     </div>
@@ -103,7 +125,8 @@
                                     <option value="0">All Categories</option>
                                     <?php									
 					                foreach ($getAllProtypes as $value) { ?>
-                                    <option value="<?php echo $value["type_id"] ?>"><?php echo $value["type_name"] ?></option>                 
+                                    <option value="<?php echo $value["type_id"] ?>"><?php echo $value["type_name"] ?>
+                                    </option>
                                     <?php } ?>
                                 </select>
                                 <input class="input" name="keyword" placeholder="Search here">
@@ -118,13 +141,25 @@
                         <div class="header-ctn">
                             <!-- Wishlist -->
                             <div>
-                                <a href="ViewWishlist.php">
+                            <?php $link = null; ?>
+                                    <?php if(isset($_SESSION['user']))
+                                    {
+                                        $link = "ViewWishlist.php";
+                                    } ?>
+                                <a href="<?php echo $link; ?>" onclick="display()">
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
                                     <?php if(isset($_SESSION['wishlist'])):
                                     $qty1 = 0; foreach($_SESSION['wishlist'] as $k => $values): ?>
                                     <div class="qty"><?php echo ++$qty1; ?></div>
                                     <?php endforeach; endif;?>
+                                    <?php if(!isset($_SESSION['user'])): ?>
+                                        <script>
+                                        function display() {
+                                            alert("Bạn phải đăng nhập trước đã!!");
+                                        }
+                                        </script>
+                                        <?php endif; ?>
                                 </a>
                             </div>
                             <!-- /Wishlist -->
@@ -156,35 +191,48 @@
                                             <div class="product-body">
                                                 <h3 class="product-name"><a href="#"><?php echo $v['name'] ?></a></h3>
                                                 <h4 class="product-price"><span
-                                                        class="qty"><?php echo $values ?>x</span><?php echo ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values  ?></h4>
+                                                        class="qty"><?php echo $values ?>x</span><?php echo number_format(($v['price'] - $v['price'] * $v['discount'] /100) *$values) . " ₫";  ?>
+                                                </h4>
                                             </div>
-                                           <a href="del.php?id=<?php echo $k ?>"><button class="delete"><i class="fa fa-close"></i></button></a> 
+                                            <a href="del.php?id=<?php echo $k ?>"><button class="delete"><i
+                                                        class="fa fa-close"></i></button></a>
                                         </div>
                                         <?php endif; endforeach; endforeach; endif;?>
                                     </div>
 
-                                    <div class="cart-summary">     
-                                        <?php if(isset($_SESSION['cart'])): ?>                   
+                                    <div class="cart-summary">
+                                        <?php if(isset($_SESSION['cart'])): ?>
                                         <small><?php echo $qty; ?> Item(s) selected</small>
-                                       
-                                        <?php                                        
+                                        <?php                                                                             
                                         $price = 0;
                                         foreach($_SESSION['cart'] as $k => $values):
                                         foreach($getAllProducts as $v):
                                             if($v['id'] == $k):
-                                        $price += ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values;
+                                        $price += ($v['price'] - $v['price'] *$v['discount'] /100) *$values;
                                         ?>
                                         <?php endif; endforeach; endforeach;  ?>
-                                        <h5>SUBTOTAL: $<?php echo $price; ?></h5>
+                                        <h5>SUBTOTAL: <?php echo  number_format($price) . " ₫"; ?></h5>
                                         <?php endif; ?>
-                                        
-                                        
+
+
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="ViewCart.php">View Cart</a>
-                                        <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                    <?php $link = $link2 = null; ?>
+                                    <?php if(isset($_SESSION['user']))
+                                    {
+                                        $link = "ViewCart.php";
+                                        $link2 = "checkout.php";
+                                    } ?>
+                                        <a href="<?php echo $link; ?>" onclick="display()">View Cart</a>
+                                        <a href="<?php echo $link2; ?>" onclick="display()">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
-
+                                    <?php if(!isset($_SESSION['user'])): ?>
+                                        <script>
+                                        function display() {
+                                            alert("Bạn phải đăng nhập trước đã!!");
+                                        }
+                                        </script>
+                                        <?php endif; ?>
                                 </div>
 
                             </div>

@@ -1,24 +1,33 @@
 <?php 
-require "./Config/database.php";
-require "./app/models/db.php";
-require "./app/models/user.php";
+require "../Config/database.php";
+require "../app/models/db.php";
+require "../app/models/user.php";
 $user = new User;
+$check = true;
+$checkpass = true;
 if(isset($_POST['btn-dangky']))
-{
+{  
     $username = $_POST['username'];
     $password = $_POST['password'];
     $repassword = $_POST['repassword'];
-    $loi = "";   
-    if(strlen($username) == 0 && strlen($username) == 0 && strlen($username) == 0)
+    $loi1 = "";   
+    $loi2 = "";   
+    if(strlen($username) == 0 || strlen($password) == 0 ||strlen($repassword) == 0 )
     {
-        $loi.="Xin hãy nhập thông tin!!";
+        $check = false;
     }
-    if( strlen($username)  != strlen($username) )
+    if($password !=  $repassword )
     {
-        $loi.="Xin hãy nhập lại mật khẩu!!";
+        $loi2.="Xin hãy nhập lại mật khẩu!!";
+        $checkpass = false;
     }
-    if($loi == ""){       
+    if($check == false)
+    {
+        $loi1.="Xin hãy nhập thông tin!!";
+    } 
+    if($loi1 == "" && $loi2==""){       
         $insertIntoUser = $user->insertIntoUser($username,$password);
+        header('location:../login/checkregister.php');
     }
 }
 
@@ -30,26 +39,30 @@ if(isset($_POST['btn-dangky']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo Trang Login</title>
-    <link type="text/css" rel="stylesheet" href="css/stylelogin.css" />
+    <link type="text/css" rel="stylesheet" href="../css/stylelogin.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <section>
         <!--Bắt Đầu Phần Hình Ảnh-->
         <div class="img-bg">
-            <img src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/tao_trang_dang_nhap/hinh_anh_minh_hoa.jpg"
+            <img src="../img/anhnen3.jpg"
                 alt="Hình Ảnh Minh Họa">
         </div>
         <!--Kết Thúc Phần Hình Ảnh-->
         <!--Bắt Đầu Phần Nội Dung-->
         <div class="noi-dung">
             <div class="form">
-                <?php //if($loi !=""): ?>
-                <!-- <div class="alert alert-danger"><?php //echo $loi; ?></div> -->
-                <?php //endif; ?>
+                <?php if($check == false): ?>
+                <div class="alert alert-danger"><?php echo $loi1; ?></div>
+                <?php endif; ?>
+                <?php if($checkpass == false): ?>
+                <div class="alert alert-danger"><?php echo $loi2; ?></div>
+                <?php endif; ?>
                 <h2>Trang Đăng Ký</h2>
                 <form action="" method="POST">
                     <div class="input-form">
@@ -71,6 +84,9 @@ if(isset($_POST['btn-dangky']))
                         <input type="submit" name="btn-dangky" value="Đăng Ký">
                     </div>
                 </form>
+                <div class="input-form">
+                        <a href="./login.php"><input type="submit" name="btn-quaylai" value="Quay lại"></a>
+                    </div>
             </div>
         </div>
         <!--Kết Thúc Phần Nội Dung-->

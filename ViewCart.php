@@ -1,4 +1,5 @@
-<?php include 'header.php' ?>
+<?php 
+include 'header.php' ?>
 <?php 
 	require "./app/models/manufactures .php";	
     $manufactures = new Manufactures;
@@ -46,10 +47,10 @@
 											</div>
 										</td>
 										<td class="goods-page-price">
-											<strong>$<?php echo number_format($p['price'])  ?> </strong>
+											<strong><?php echo number_format($p['price']) . " ₫"; ?> </strong>
 										</td>
 										<td class="goods-page-total">
-										<strong>$<?php echo  number_format(($p['price'] - $p['price'] * number_format($p['discount']) /100) *$values)  ?> </strong>
+										<strong><?php echo  number_format(($p['price'] - $p['price'] * number_format($p['discount']) /100) *$values) . " ₫"; ?> </strong>
 										</td>
 										<td class="del-goods-col">
                                         <a href="delViewcart.php?id=<?php echo $key ?>"><button class="delete"><i class="fa fa-close"></i></button></a>
@@ -65,7 +66,8 @@
 								<ul>
 									<li class="shopping-total-price">
 										<em>Total</em>
-                                        <?php                                        
+                                        <?php 
+										if(isset($_SESSION['cart'])):                                    
                                         $price = 0;
                                         foreach($_SESSION['cart'] as $k => $values):
                                         foreach($getAllProducts as $v):
@@ -73,7 +75,8 @@
                                         $price += ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values;
                                         ?>
                                          <?php endif; endforeach; endforeach; endif;  ?>
-										<strong class="price"><span>$</span><?php echo number_format( $price) ?> </strong>
+										<strong class="price"><span></span><?php echo number_format( $price) ?> </strong>
+										<?php endif; ?>
 									</li>
 								</ul>
 							</div>

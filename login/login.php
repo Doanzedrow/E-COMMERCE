@@ -3,6 +3,8 @@ require "../Config/database.php";
 require "../app/models/db.php"; 
 require "../app/models/user.php";
 $user = new User;
+$loi = "";
+$check = true;
 if(isset($_POST['btn-dangnhap']))
 {
     $username = $_POST['username'];
@@ -14,7 +16,8 @@ if(isset($_POST['btn-dangnhap']))
     }
     else
     {
-        header('location:./login/indexlogin.php');
+        $loi.="Sai mật khẩu hoặc tài khoản!!";
+        $check = false;
     }
 }
 ?>
@@ -23,31 +26,36 @@ if(isset($_POST['btn-dangnhap']))
  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Tạo Trang Login</title>
+     <title>Login</title>
      <link type="text/css" rel="stylesheet" href="../css/stylelogin.css"/>
      <link rel="preconnect" href="https://fonts.gstatic.com">
      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+     
 </head>
 <body>
 <section>
      <!--Bắt Đầu Phần Hình Ảnh-->
      <div class="img-bg">
-         <img src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/tao_trang_dang_nhap/hinh_anh_minh_hoa.jpg" alt="Hình Ảnh Minh Họa">
+         <img src="../img/anhnen3.jpg" alt="Hình Ảnh Minh Họa">
      </div>
      <!--Kết Thúc Phần Hình Ảnh-->
      <!--Bắt Đầu Phần Nội Dung-->
      <div class="noi-dung">
          <div class="form">
              <h2>Trang Đăng Nhập</h2>
-             <form action="">
+                <form action="" method="post">
+                    <?php if($check == false): ?>   
+                        <div class="alert alert-danger"><?php echo $loi; ?></div>                                     
+                        <?php endif; ?>                
                  <div class="input-form">
                      <span>Tên Người Dùng</span>
-                     <input type="text" name="">
+                     <input type="text" name="username" id="username">
                  </div>
                  <div class="input-form">
                      <span>Mật Khẩu</span>
-                     <input type="password" name="">
+                     <input type="password" name="password" id="password">
                  </div>
                  <div class="nho-dang-nhap">
                      <label><input type="checkbox" name=""> Nhớ Đăng Nhập</label>
@@ -58,7 +66,7 @@ if(isset($_POST['btn-dangnhap']))
                  <div class="input-form">
                      <p>Bạn Chưa Có Tài Khoản? <a href="register.php">Đăng Ký</a></p>
                  </div>
-             </form>
+                </form>
              <h3>Đăng Nhập Bằng Mạng Xã Hội</h3>
              <ul class="icon-dang-nhap">
                  <li><i class="fa fa-facebook" aria-hidden="true"></i></li>

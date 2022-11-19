@@ -1,4 +1,5 @@
-<?php include 'header.php' ?>
+<?php
+include 'header.php' ?>
 <?php 
 	require "./app/models/manufactures .php";
 	$manufactures = new Manufactures;
@@ -81,8 +82,8 @@
                                 <div class="product-body">
                                     <p class="product-category"><?php echo $va['type_name']?></p>
                                     <h3 class="product-name"><a href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo substr($v['name'],0,23) ?></a></h3>
-                                    <h4 class="product-price"><?php echo $v['price']- $v['price'] * number_format($v['discount']) /100  ?> <del
-                                            class="product-old-price"><?php echo $v['price'] ?></del>
+                                    <h4 class="product-price"><?php echo  number_format($v['price'] - $v['price'] *$v['discount'] /100)." ₫";  ?> <br> <del
+                                            class="product-old-price"><?php echo number_format($v['price']) ." ₫";  ?></del>
                                     </h4>
                                     <div class="product-rating">
                                         <i class="fa fa-star"></i>
@@ -100,11 +101,23 @@
                                                 view</span></button>
                                     </div>
                                 </div>
-                                <div class="add-to-cart">
-                                <a href="cart.php?id=<?php echo $v['id'] ?>"><button type="submit"
-                                                    class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to
-                                                    cart</button></a>
-                                </div>
+                                <?php $link = null; ?>
+                            <?php if(isset($_SESSION['user']))
+                                    {
+                                        $link = "cart.php?id=". $v['id'];
+                                    } ?>
+                            <div class="add-to-cart">
+                                <a href="<?php echo $link ?>" onclick="display()"><button type="submit" class="add-to-cart-btn"><i
+                                            class="fa fa-shopping-cart"></i> add to
+                                        cart</button></a>
+                                        <?php if(!isset($_SESSION['user'])): ?>
+                                        <script>
+                                        function display() {
+                                            alert("Bạn phải đăng nhập trước đã!!");
+                                        }
+                                        </script>
+                                        <?php endif; ?>
+                            </div>
                             </div>
                         </div>
                         <!-- /product -->                     

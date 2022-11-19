@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 18, 2022 lúc 01:30 AM
+-- Thời gian đã tạo: Th10 19, 2022 lúc 01:04 AM
 -- Phiên bản máy phục vụ: 5.7.36
 -- Phiên bản PHP: 7.4.26
 
@@ -44,6 +44,33 @@ INSERT INTO `manufactures` (`manu_id`, `manu_name`) VALUES
 (3, 'SamSung'),
 (4, 'LG'),
 (5, 'Acer');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `personinfor`
+--
+
+DROP TABLE IF EXISTS `personinfor`;
+CREATE TABLE IF NOT EXISTS `personinfor` (
+  `id_person` int(11) NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `ngaysinh` date NOT NULL,
+  `sdt` int(12) NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phai` tinyint(1) NOT NULL DEFAULT '0',
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_person`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `personinfor`
+--
+
+INSERT INTO `personinfor` (`id_person`, `fullname`, `ngaysinh`, `sdt`, `email`, `phai`, `id_user`) VALUES
+(1, 'Trần Hữu Đoàn', '2003-04-08', 968673591, 'tranhuudoan2003@gmail.com', 1, 1),
+(2, 'Nguyễn Thị Lan Anh', '2003-03-08', 968457647, 'lananh0803@gmail.com', 0, 2),
+(5, 'Tran Van A', '2022-11-18', 968123123, 'vana@gmail.com', 1, 26);
 
 -- --------------------------------------------------------
 
@@ -132,19 +159,20 @@ INSERT INTO `protypes` (`type_id`, `type_name`) VALUES
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`) VALUES
-(1, 'doan', '0804'),
-(2, 'lananh', '0803');
+INSERT INTO `user` (`id_user`, `username`, `password`) VALUES
+(1, 'doan', 'b3f3d1d6a03bb893c6fe0329ddb917c6'),
+(2, 'lananh', 'e26c874ebe35bff978cd8e88597f7afb'),
+(26, 'admin', 'c4ca4238a0b923820dcc509a6f75849b');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

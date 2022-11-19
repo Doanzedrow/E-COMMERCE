@@ -1,4 +1,5 @@
-<?php include 'header.php' ?>
+<?php 
+	include 'header.php' ?>
 <?php 
 	require "./app/models/manufactures .php";		
 	$manufactures = new Manufactures;
@@ -64,7 +65,8 @@
 								<ul>
 									<li class="shopping-total-price">
 										<em>Total</em>
-                                        <?php                                        
+                                        <?php  
+										if(isset($_SESSION['wishlist'])):                                      
                                         $price = 0;
                                         foreach($_SESSION['wishlist'] as $k => $values):
                                         foreach($getAllProducts as $v):
@@ -72,7 +74,8 @@
                                         $price += ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values;
                                         ?>
                                          <?php endif; endforeach; endforeach; endif;  ?>
-										<strong class="price"><span>$</span><?php echo number_format( $price) ?> </strong>
+										<strong class="price"><span>$</span><?php echo number_format($price) ?> </strong>
+										<?php endif; ?>
 									</li>
 								</ul>
 							</div>
