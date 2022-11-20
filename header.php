@@ -43,6 +43,7 @@ session_start();
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="css/style.css" />
     <link type="text/css" rel="stylesheet" href="css/styledrop.css" />
+    <link type="text/css" rel="stylesheet" href="css/styleform.css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -120,12 +121,12 @@ session_start();
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
-                            <form action="result.php" method="get">
-                                <select class="input-select">
+                            <form action="result.php" method="post">
+                                <select class="input-select" name="type_prd">
                                     <option value="0">All Categories</option>
                                     <?php									
 					                foreach ($getAllProtypes as $value) { ?>
-                                    <option value="<?php echo $value["type_id"] ?>"><?php echo $value["type_name"] ?>
+                                    <option  value="<?php echo $value["type_id"] ?>"><?php echo $value["type_name"] ?>
                                     </option>
                                     <?php } ?>
                                 </select>
@@ -134,6 +135,7 @@ session_start();
                             </form>
                         </div>
                     </div>
+                    <?php //echo $_GET['type_prd'] ?>
                     <!-- /SEARCH BAR -->
 
                     <!-- ACCOUNT -->

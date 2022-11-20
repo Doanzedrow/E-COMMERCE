@@ -60,7 +60,9 @@
                     <div>
                         <h3 class="product-price">
                             <?php echo number_format($v['price'] - $v['price'] * $v['discount'] /100) . " ₫";?>
-                            <del class="product-old-price" style="padding-left:10px;"><?php echo number_format($v['price']) . " ₫"; ?></del></h3>
+                            <del class="product-old-price"
+                                style="padding-left:10px;"><?php echo number_format($v['price']) . " ₫"; ?></del>
+                        </h3>
                         <span class="product-available">In Stock</span>
                     </div>
                     <p><?php echo $v['description'] ?></p>
@@ -69,7 +71,7 @@
                                     {
                                         $link = "cart.php?id=". $v['id'];
                                     } ?>
-                    <form action="<?php echo $link; ?>" method="post" >
+                    <form action="<?php echo $link; ?>" method="post">
                         <div class="add-to-cart">
                             <div class="qty-label">
                                 Qty
@@ -81,20 +83,26 @@
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
-                            <button type="submit" class="add-to-cart-btn" onclick="display()"><i class="fa fa-shopping-cart"></i> add to
+                            <button type="submit" class="add-to-cart-btn" onclick="display()"><i
+                                    class="fa fa-shopping-cart"></i> add to
                                 cart</button>
-                                <?php if(!isset($_SESSION['user'])): ?>
-                                        <script>
-                                        function display() {
-                                            alert("Bạn phải đăng nhập trước đã!!");
-                                        }
-                                        </script>
-                                        <?php endif; ?>
+                            <?php if(!isset($_SESSION['user'])): ?>
+                            <script>
+                            function display() {
+                                alert("Bạn phải đăng nhập trước đã!!");
+                            }
+                            </script>
+                            <?php endif; ?>
                     </form>
                 </div>
                 <?php endforeach; ?>
+                <?php $link1 = null; ?>
+                <?php   if(isset($_SESSION['user']))
+                        {
+                            $link1 = 'wishlist.php?id='.  $v['id'];
+                        } ?>
                 <ul class="product-btns">
-                    <li><a href="wishlist.php?id=<?php echo $v['id'] ?>"><i class="fa fa-heart-o"></i> add to
+                    <li><a href="<?php echo $link1; ?>" onclick="display()"><i class="fa fa-heart-o"></i> add to
                             wishlist</a></li>
                     <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
                 </ul>
@@ -105,7 +113,7 @@
 									?>
                 <ul class="product-links">
                     <li>Category:</li>
-                    <li><a href="#"><?php echo $v['type_name'] ?></a></li>
+                    <li><a href="./productOfprotypes.php?type_id=<?php echo $v['type_id'] ?>"><?php echo $v['type_name'] ?></a></li>
                 </ul>
                 <?php endif; endforeach; endforeach; ?>
                 <ul class="product-links">
@@ -394,13 +402,15 @@
                                 href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo substr($v['name'],0,23) ?></a>
                         </h3>
                         <h4 class="product-price">
-                            <?php echo number_format($v['price'] - $v['price'] * $v['discount'] /100) . " ₫"; ?> <br><del
-                                class="product-old-price"><?php echo number_format($v['price']). " ₫" ?></del></h4>
+                            <?php echo number_format($v['price'] - $v['price'] * $v['discount'] /100) . " ₫"; ?>
+                            <br><del class="product-old-price"><?php echo number_format($v['price']). " ₫" ?></del>
+                        </h4>
                         <div class="product-rating">
                         </div>
                         <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add
-                                    to wishlist</span></button>
+                            <button class="add-to-wishlist"><a href="<?php echo $link1; ?>" onclick="display()"><i
+                                        class="fa fa-heart-o"></i><span class="tooltipp">add to
+                                        wishlist</span></a></button>
                             <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
                                     to compare</span></button>
                             <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
@@ -408,7 +418,9 @@
                         </div>
                     </div>
                     <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                        <a href="<?php echo $link; ?>" onclick="display()"><button type="submit"
+                                class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to
+                                cart</button></a>
                     </div>
                 </div>
             </div>
