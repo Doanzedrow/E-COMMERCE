@@ -69,7 +69,7 @@
                     <?php $link = null; ?>
                     <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id'];
+                                        $link = "cart.php?id=". $v['id']."&&page=product.php";
                                     } ?>
                     <form action="<?php echo $link; ?>" method="post">
                         <div class="add-to-cart">
@@ -99,7 +99,7 @@
                 <?php $link1 = null; ?>
                 <?php   if(isset($_SESSION['user']))
                         {
-                            $link1 = 'wishlist.php?id='.  $v['id'];
+                            $link1 = 'wishlist.php?id='.  $v['id']."&&page=product.php";
                         } ?>
                 <ul class="product-btns">
                     <li><a href="<?php echo $link1; ?>" onclick="display()"><i class="fa fa-heart-o"></i> add to
@@ -407,6 +407,11 @@
                         </h4>
                         <div class="product-rating">
                         </div>
+                        <?php $link1 = null; ?>
+                         <?php   if(isset($_SESSION['user']))
+                        {
+                            $link1 = 'wishlist.php?id='.  $v['id']."&&page=product.php";
+                        } ?>
                         <div class="product-btns">
                             <button class="add-to-wishlist"><a href="<?php echo $link1; ?>" onclick="display()"><i
                                         class="fa fa-heart-o"></i><span class="tooltipp">add to

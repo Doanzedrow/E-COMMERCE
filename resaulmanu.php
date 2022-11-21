@@ -11,7 +11,9 @@
 						    if($v['type_id'] == $va['type_id'] ):
                                 foreach($_POST['thuonghieu'] as $value):
                                     foreach($getAllManufactures as $k):
-                                        if($value == $k['manu_name'] && $v['menu_id'] == $k['manu_id']):		                        
+                                        if($value == $k['manu_name'] && $v['menu_id'] == $k['manu_id']):	
+                                            foreach($e as $value):
+                                                if( $va['type_id'] == $value ):	                        
 						?>
                     <!-- product -->
                     <div class="col-md-4 col-xs-6" style="margin-bottom:50px">
@@ -43,7 +45,7 @@
                                 <?php $link1 = null; 
                                     if(isset($_SESSION['user']))
                                     {
-                                        $link1 = 'wishlist.php?id='.  $v['id'];
+                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=result.php"."&&type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword'];
                                     } ?>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><a href="<?php echo $link1; ?>"
@@ -60,7 +62,7 @@
                             <?php $link = null; ?>
                             <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id'];
+                                        $link = "cart.php?id=". $v['id']."&&page=result.php"."&&type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword'];
                                     } ?>
                             <div class="add-to-cart">
                                 <a href="<?php echo $link ?>" onclick="display()"><button type="submit"
@@ -77,7 +79,7 @@
                         </div>
                     </div>
                     <!-- /product -->
-                    <?php endif;  endforeach; endforeach; endif; endforeach; endforeach;  ?>
+                    <?php endif;  endforeach; endif;  endforeach; endforeach; endif; endforeach; endforeach;  ?>
 
                     <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 

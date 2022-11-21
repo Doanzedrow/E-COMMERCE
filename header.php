@@ -22,7 +22,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
+    <title>NHOM8</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -89,10 +89,12 @@ session_start();
                                 ?>
                             </a>
                             <div class="noidung_dropdown">
-                                <?php if(isset($_SESSION['user'])): ?>                              
-                                <a href="./logout/logout.php">Logout</a>                             
+                                <?php if(isset($_SESSION['user'])): ?>  
+                                <a href="./information.php">Information</a>                              
+                                <a href="./logout/logout.php">Logout</a>     
+                                                       
                                <?php else: ?>
-                                    <a href="./login/login.php">Login</a>                                
+                                    <a href="./login/login.php">Login</a>                                 
                                 <?php  endif;?>                                                                
                             </div>
                         </div>
@@ -121,7 +123,7 @@ session_start();
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
-                            <form action="result.php" method="post">
+                            <form action="result.php" method="get">
                                 <select class="input-select" name="type_prd">
                                     <option value="0">All Categories</option>
                                     <?php									

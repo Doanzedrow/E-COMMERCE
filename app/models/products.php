@@ -62,7 +62,7 @@ class Product extends Db{
     public function searchProducts($keyword)
     {
         //Tim kiem
-        $sql = self::$connection->prepare("SELECT * FROM products WHERE `description`  LIKE ?");
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE `name`  LIKE ?");
         $keyword = "%$keyword%";
         $sql->bind_param("s",$keyword);
         $sql->execute(); //return an object

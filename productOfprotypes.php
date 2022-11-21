@@ -106,7 +106,7 @@
                                 <?php $link1 = null; 
                                     if(isset($_SESSION['user']))
                                     {
-                                        $link1 = 'wishlist.php?id='.  $v['id'];
+                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id'];
                                     } ?>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><a href="<?php echo $link1; ?>"
@@ -122,7 +122,7 @@
                             <?php $link = null; ?>
                             <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id'];
+                                        $link = "cart.php?id=". $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id'];
                                     } ?>
                             <div class="add-to-cart">
                                 <a href="<?php echo $link ?>" onclick="display()"><button type="submit"

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 19, 2022 lúc 01:04 AM
+-- Thời gian đã tạo: Th10 20, 2022 lúc 04:34 PM
 -- Phiên bản máy phục vụ: 5.7.36
 -- Phiên bản PHP: 7.4.26
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `personinfor` (
   `phai` tinyint(1) NOT NULL DEFAULT '0',
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id_person`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `personinfor`
@@ -70,7 +70,8 @@ CREATE TABLE IF NOT EXISTS `personinfor` (
 INSERT INTO `personinfor` (`id_person`, `fullname`, `ngaysinh`, `sdt`, `email`, `phai`, `id_user`) VALUES
 (1, 'Trần Hữu Đoàn', '2003-04-08', 968673591, 'tranhuudoan2003@gmail.com', 1, 1),
 (2, 'Nguyễn Thị Lan Anh', '2003-03-08', 968457647, 'lananh0803@gmail.com', 0, 2),
-(5, 'Tran Van A', '2022-11-18', 968123123, 'vana@gmail.com', 1, 26);
+(7, 'Tran Van A', '2022-11-20', 123456, 'vana@gmail.com', 1, 28),
+(8, 'Tran Van B', '2022-11-20', 968123123, 'vanb@gmail.com', 0, 29);
 
 -- --------------------------------------------------------
 
@@ -163,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
@@ -172,7 +173,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id_user`, `username`, `password`) VALUES
 (1, 'doan', 'b3f3d1d6a03bb893c6fe0329ddb917c6'),
 (2, 'lananh', 'e26c874ebe35bff978cd8e88597f7afb'),
-(26, 'admin', 'c4ca4238a0b923820dcc509a6f75849b');
+(28, 'admin', 'c4ca4238a0b923820dcc509a6f75849b'),
+(29, 'admin2', 'c81e728d9d4c2f636f067f89cc14862c');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -19,7 +19,7 @@
                     </div>
                     <div class="shop-body">
                         <h3><?php echo $v['type_name'] ?><br>Collection</h3>
-                        <a href="product.php?id=3" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="product.php?id=<?php echo $value['id']?>" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                                         <?php $link1 = null; ?>
                                         <?php if(isset($_SESSION['user']))
                                         {
-                                            $link1 = 'wishlist.php?id='.  $v['id'];
+                                            $link1 = 'wishlist.php?id='.  $v['id'].'&&page=index.php';
                                         } ?>
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><a
@@ -106,7 +106,7 @@
                                     <?php $link = null; ?>
                                     <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id'];
+                                        $link = "cart.php?id=". $v['id'].'&&page=index.php';
                                     } ?>
                                     <div class="add-to-cart">
                                         <a href="<?php echo $link; ?>" onclick="display()"><button type="submit"
@@ -163,7 +163,9 @@
                         <div id="tab2" class="tab-pane fade in active">
                             <div class="products-slick" data-nav="#slick-nav-2">
                                 <!-- product -->
-                                <?php foreach($get5TopSellingProducts as $v): ?>
+                                <?php foreach($get5TopSellingProducts as $v):
+                                     foreach($getAllProtypes as $va):
+                                        if($va['type_id'] == $v['type_id']): ?>
                                 <div class="product">
                                     <div class="product-img" style="width:263px; height:300px">
                                         <img src="./img/<?php echo $v['image'] ?>" alt="">
@@ -173,7 +175,7 @@
                                         </div>
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category">Category</p>
+                                        <p class="product-category"><?php echo $va['type_name'] ?></p>
                                         <h3 class="product-name"><a
                                                 href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo substr($v['name'],0,23) ?></a>
                                         </h3>
@@ -190,6 +192,11 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
+                                        <?php $link1 = null; ?>
+                                        <?php if(isset($_SESSION['user']))
+                                        {
+                                            $link1 = 'wishlist.php?id='.  $v['id'].'&&page=index.php';
+                                        } ?>
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><a
                                             href="<?php echo $link1; ?>" onclick="display()"><i
@@ -204,7 +211,7 @@
                                     <?php $link = null; ?>
                                     <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id'];
+                                        $link = "cart.php?id=". $v['id'].'&&page=index.php';
                                     } ?>
                                     <div class="add-to-cart">
                                         <a href="<?php echo  $link; ?>" onclick="display()"><button type="submit"
@@ -216,11 +223,11 @@
                                             alert("Bạn phải đăng nhập trước đã!!");
                                         }
                                         </script>
-                                        <?php endif; ?>
+                                        <?php  endif; ?>
                                     </div>
 
                                 </div>
-                                <?php endforeach; ?>
+                                <?php endif;  endforeach; endforeach; ?>
                                 <!-- /product -->
 
 
@@ -265,7 +272,7 @@
                                 <img src="./img/<?php echo $v['image'] ?>" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
+                            <p class="product-category"><?php echo "ĐIỆN THOẠI" ?></p>
                                 <h3 class="product-name"><a
                                         href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a>
                                 </h3>
@@ -302,7 +309,7 @@
                                 <img src="./img/<?php echo $v['image'] ?>" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
+                            <p class="product-category"><?php echo "LAPTOP" ?></p>
                                 <h3 class="product-name"><a
                                         href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a>
                                 </h3>
@@ -341,7 +348,7 @@
                                 <img src="./img/<?php echo $v['image'] ?>" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
+                            <p class="product-category"><?php echo "MÀN HÌNH" ?></p>
                                 <h3 class="product-name"><a
                                         href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo $v['name'] ?></a>
                                 </h3>

@@ -3,14 +3,14 @@ include 'header.php' ?>
 <?php 
 	require "./app/models/manufactures .php";
 	$manufactures = new Manufactures;
-	if (isset($_POST['keyword'])){
-		$key = $_POST['keyword'];	
+	if (isset($_GET['keyword'])){
+		$key = $_GET['keyword'];	
 	}
 	$searchProducts = $product->searchProducts($key);
 	$getAllManufactures = $manufactures->getAllManufactures();
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    //if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $e = array();   
-        if(($_POST['type_prd']) == 0)
+        if(($_GET['type_prd']) == 0)
         {     
             foreach($getAllProtypes as $k)
             {
@@ -18,10 +18,10 @@ include 'header.php' ?>
             }               
         }      
         else{
-            $e['type_prd'] = $_POST['type_prd'];
+            $e['type_prd'] = $_GET['type_prd'];
         }
        
-    }
+    //}
      ?>
 
 <!-- BREADCRUMB -->
@@ -45,7 +45,11 @@ include 'header.php' ?>
                         <form action="" method="POST">
                             <div class="input-checkbox">
                                 <input type="checkbox" name="thuonghieu[]" id="<?php echo $v['manu_name']?>"
-                                    value="<?php echo $v['manu_name']?>">
+                                    value="<?php
+                                    
+                                    echo $v['manu_name'];
+                                    
+                                     ?>">
                                 <label for="<?php echo $v['manu_name'] ?>">
                                     <span></span>
                                     <?php echo $v['manu_name'] ?>
@@ -53,8 +57,11 @@ include 'header.php' ?>
 										$a = 0;
 									 	foreach($searchProducts as $i):
 										if($v['manu_id'] == $i['menu_id']):
+                                            
+                                            foreach($e as $value):
+                                                if( $i['type_id'] == $value ):
 											$a++; ?>
-                                    <?php endif; endforeach; ?>
+                                    <?php  endif; endforeach;  endif; endforeach; ?>
                                     <small><?php echo '( ' .$a.' )' ?></small>
 
                                 </label>
@@ -119,7 +126,7 @@ include 'header.php' ?>
                                 <?php $link1 = null; 
                                     if(isset($_SESSION['user']))
                                     {
-                                        $link1 = 'wishlist.php?id='.  $v['id'];
+                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=result.php"."&&type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword'];
                                     } ?>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><a href="<?php echo $link1; ?>"
@@ -135,7 +142,7 @@ include 'header.php' ?>
                             <?php $link = null; ?>
                             <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id'];
+                                        $link = "cart.php?id=". $v['id']."&&page=result.php"."&&type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword'];
                                     } ?>
                             <div class="add-to-cart">
                                 <a href="<?php echo $link ?>" onclick="display()"><button type="submit"
