@@ -1,38 +1,18 @@
 <?php
-include 'header.php' ?>
-<?php 
-	require "./app/models/manufactures .php";
-	$manufactures = new Manufactures;
-	if (isset($_GET['keyword'])){
-		$key = $_GET['keyword'];	
-	}
-	$searchProducts = $product->searchProducts($key);
-	$getAllManufactures = $manufactures->getAllManufactures();
-    //if ($_SERVER['REQUEST_METHOD'] == "GET") {
-        $e = array();   
-        if(($_GET['type_prd']) == 0)
-        {     
-            foreach($getAllProtypes as $k)
-            {
-                array_push($e,$k['type_id']);    
-            }               
-        }      
-        else{
-            $e['type_prd'] = $_GET['type_prd'];
-        }
+ include 'header.php' ?>
+<?php   
     $perPage = 6;
     $pages = $_GET['pages'];
     $total = 0;
-    foreach($searchProducts as $v){     
+    foreach($getAllProducts as $v)
+    {
         $total++;
-    }                                                        
-    $totalLinks = ceil($total/$perPage);
+    }
     $url = $_SERVER['PHP_SELF'];
-    $getsearchProducts = $product->getsearchProducts($pages,$perPage,$key);
-    $paginateOfSearch = $product->paginateOfSearch($url,$total,$pages,$perPage,1,$key,$_GET['type_prd']);
-       
-    //}
-     ?>
+    $phanTrang = $product->phanTrang($pages,$perPage);
+    $totalLinks = ceil($total/$perPage);
+    $paginateTest = $product->paginateTest($url,$total,$pages,$perPage,1);
+    ?>
 
 <!-- BREADCRUMB -->
 
@@ -46,51 +26,17 @@ include 'header.php' ?>
         <div class="row">
             <!-- ASIDE -->
             <div id="aside" class="col-md-3">
-                <!-- aside Widget -->
-                <div class="aside">
-                    <h3 class="aside-title">Brand</h3>
-                    <div class="checkbox-filter">
-                        <?php						
-								foreach($getAllManufactures as $v):?>
-                        <form action="" method="POST">
-                            <div class="input-checkbox">
-                                <input type="checkbox" name="thuonghieu[]" id="<?php echo $v['manu_name']?>" value="<?php
-                                    
-                                    echo $v['manu_name'];
-                                    
-                                     ?>">
-                                <label for="<?php echo $v['manu_name'] ?>">
-                                    <span></span>
-                                    <?php echo $v['manu_name'] ?>
-                                    <?php
-										$a = 0;
-									 	foreach($searchProducts as $i):
-										if($v['manu_id'] == $i['menu_id']):
-                                            
-                                            foreach($e as $value):
-                                                if( $i['type_id'] == $value ):
-											$a++; ?>
-                                    <?php  endif; endforeach;  endif; endforeach; ?>
-                                    <small><?php echo '( ' .$a.' )' ?></small>
-
-                                </label>
-                            </div>
-                            <?php endforeach; ?>
-                            <button type="submit" class="custom-btn btn-8"><span>Confirm</span></button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /aside Widget -->
-
+           
                 <!-- aside Widget -->
                 <!-- /aside Widget -->
             </div>
             <!-- /ASIDE -->
+
+            <!-- STORE -->
             <?php if(isset($_POST['thuonghieu'])){ 
-                include './resaulmanu.php'; ?>
+                include './productOfManu.php'; ?>
             <?php }
             else{ ?>
-            <!-- STORE -->
             <div id="store" class="col-md-9">
                 <!-- store top filter -->
 
@@ -98,12 +44,9 @@ include 'header.php' ?>
 
                 <!-- store products -->
                 <div class="row">
-                    <?php						
-							foreach ($getsearchProducts as $v):
-								foreach($getAllProtypes as $va):
-									if($v['type_id'] == $va['type_id']):
-                                        foreach($e as $value):
-                                            if( $va['type_id'] == $value ):
+                    <?php          
+						foreach($phanTrang as $v):	                           
+						                   
 						?>
                     <!-- product -->
                     <div class="col-md-4 col-xs-6" style="margin-bottom:50px">
@@ -116,14 +59,14 @@ include 'header.php' ?>
                                 </div>
                             </div>
                             <div class="product-body">
-                                <p class="product-category"><?php echo $va['type_name']?></p>
+                                <p class="product-category"><?php?></p>
                                 <h3 class="product-name"><a
                                         href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo substr($v['name'],0,23) ?></a>
                                 </h3>
                                 <h4 class="product-price">
                                     <?php echo  number_format($v['price'] - $v['price'] *$v['discount'] /100)." ₫";  ?>
-                                    <br> <del
-                                        class="product-old-price"><?php echo number_format($v['price']) ." ₫";  ?></del>
+                                    <br><del
+                                        class="product-old-price"><?php echo number_format($v['price']) ." ₫"; ?></del>
                                 </h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -135,7 +78,7 @@ include 'header.php' ?>
                                 <?php $link1 = null; 
                                     if(isset($_SESSION['user']))
                                     {
-                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=result.php"."&&type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword'];
+                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id'];
                                     } ?>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><a href="<?php echo $link1; ?>"
@@ -151,7 +94,7 @@ include 'header.php' ?>
                             <?php $link = null; ?>
                             <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id']."&&page=result.php"."&&type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword'];
+                                        $link = "cart.php?id=". $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id']."&&pages=".$_GET['pages'];
                                     } ?>
                             <div class="add-to-cart">
                                 <a href="<?php echo $link ?>" onclick="display()"><button type="submit"
@@ -168,7 +111,8 @@ include 'header.php' ?>
                         </div>
                     </div>
                     <!-- /product -->
-                    <?php endif; endforeach; endif; endforeach; endforeach;  ?>
+                    <?php endforeach; ?>
+
                     <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 
 
@@ -180,28 +124,25 @@ include 'header.php' ?>
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
                     <span class="store-qty">Showing 20-100 products</span>
-                    <ul class="store-pagination">
+                    <ul class="store-pagination">                  
                         <?php if($_GET['pages'] > 1):
                             $prev_page = $_GET['pages'] - 1; ?>
-                        <li><a
-                                href='result?type_prd=<?php echo $_GET['type_prd'] ?>&&keyword=<?php echo $_GET['keyword'] ?>&&pages=<?php echo $prev_page ?>'><i
-                                    class="fa fa-angle-left"></i></a></li>
+                            <li><a  href = 'test?&&pages=<?php echo $prev_page ?>'><i class="fa fa-angle-left"></i></a></li>
                         <?php endif; ?>
-
-                        <?php echo $paginateOfSearch; ?>
-
-                        <?php if($_GET['pages'] < $totalLinks - 1):
+                        <?php foreach($paginateTest as $p): ?>
+                            <?php echo $p; ?>
+                        <?php endforeach; ?>
+                            <?php if($_GET['pages'] < $totalLinks - 1):
                                 $next_page = $_GET['pages'] + 1 ?>
-                        <li><a
-                                href='result?type_prd=<?php echo $_GET['type_prd'] ?>&&keyword=<?php echo $_GET['keyword']  ?>&&pages=<?php echo $next_page  ?>'><i
-                                    class="fa fa-angle-right"></i></a></li>
+                        <li><a  href = 'test?&&pages=<?php echo $next_page  ?>'><i class="fa fa-angle-right"></i></a></li>
                         <?php endif; ?>
+                         
                     </ul>
                 </div>
                 <!-- /store bottom filter -->
             </div>
-            <!-- /STORE -->
             <?php }?>
+            <!-- /STORE -->
         </div>
         <!-- /row -->
     </div>

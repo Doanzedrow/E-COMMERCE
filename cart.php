@@ -24,7 +24,7 @@ if($page == 'index.php')
 }
 else if($page == 'productOfprotypes.php')
 {
-    header('location:'.$page.'?type_id='.$_GET['type_id']);
+    header('location:'.$page.'?type_id='.$_GET['type_id']."&&pages=".$_GET['pages']);
 }
 else if($page == 'result.php')
 {

@@ -123,7 +123,7 @@ session_start();
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
-                            <form action="result.php" method="get">
+                            <form action="./results.php" method="get">
                                 <select class="input-select" name="type_prd">
                                     <option value="0">All Categories</option>
                                     <?php									
@@ -137,7 +137,8 @@ session_start();
                             </form>
                         </div>
                     </div>
-                    <?php //echo $_GET['type_prd'] ?>
+                    <?php 
+                    ?>
                     <!-- /SEARCH BAR -->
 
                     <!-- ACCOUNT -->
@@ -274,7 +275,7 @@ session_start();
                     <?php									
 					foreach ($getAllProtypes as $value) { 	?>
                     <li><a
-                            href="productOfprotypes.php?type_id=<?php echo $value["type_id"] ?>"><?php echo $value["type_name"] ?></a>
+                            href="productOfprotypes.php?type_id=<?php echo $value["type_id"] ?>&&pages=1"><?php echo $value["type_name"] ?></a>
                     </li><?php } ?>
                 </ul>
                 <!-- /NAV -->

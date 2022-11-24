@@ -9,8 +9,23 @@
 	$manufactures = new Manufactures;
 	$getProtypeById = $product->getProtypeById($id);
 	$getAllManufactures = $manufactures->getAllManufactures(); 
-  
-   
+    
+    $perPage = 6;
+    $pages = $_GET['pages'];
+    $total = 0;
+    foreach($getProtypeById as $v){
+        foreach($getAllProtypes as $va)
+        {
+            if($v['type_id'] == $va['type_id'] )
+            {
+                $total++;
+            }
+        }
+    }                                                        
+    $totalLinks = ceil($total/$perPage);
+    $url = $_SERVER['PHP_SELF'];
+    $getProtypeByIdPage = $product->getProtypeByIdPage($pages,$perPage,$id);
+    $paginateOftype = $product->paginateOftype($url,$total,$pages,$perPage,1,$id);
     ?>
 
 <!-- BREADCRUMB -->
@@ -60,11 +75,15 @@
             <!-- /ASIDE -->
 
             <!-- STORE -->
-            <?php if(isset($_POST['thuonghieu'])){ 
-                include './productOfManu.php'; ?>
-            <?php }
-            else{ ?>
+            <?php if(isset($_POST['thuonghieu']))
+                {
+                    include './productOfManu.php';
+                }
+                else
+                {
+                ?>
             <div id="store" class="col-md-9">
+
                 <!-- store top filter -->
 
                 <!-- /store top filter -->
@@ -72,9 +91,9 @@
                 <!-- store products -->
                 <div class="row">
                     <?php          
-						foreach($getProtypeById as $v):	                           
+						foreach($getProtypeByIdPage as $v):	  
 						foreach($getAllProtypes as $va):
-						if($v['type_id'] == $va['type_id'] ):		                        
+						if($v['type_id'] == $va['type_id']):		                        
 						?>
                     <!-- product -->
                     <div class="col-md-4 col-xs-6" style="margin-bottom:50px">
@@ -122,7 +141,7 @@
                             <?php $link = null; ?>
                             <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "cart.php?id=". $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id'];
+                                        $link = "cart.php?id=". $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id']."&&pages=".$_GET['pages'];
                                     } ?>
                             <div class="add-to-cart">
                                 <a href="<?php echo $link ?>" onclick="display()"><button type="submit"
@@ -143,9 +162,6 @@
 
                     <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 
-
-
-
                 </div>
                 <!-- /store products -->
 
@@ -153,13 +169,26 @@
                 <div class="store-filter clearfix">
                     <span class="store-qty">Showing 20-100 products</span>
                     <ul class="store-pagination">
-                        <li class="active">1</li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <?php if($_GET['pages'] > 1):
+                            $prev_page = $_GET['pages'] - 1; ?>
+                        <li><a
+                                href='productOfprotypes?type_id=<?php echo $_GET['type_id'] ?>?&&pages=<?php echo $prev_page ?>'><i
+                                    class="fa fa-angle-left"></i></a></li>
+                        <?php endif; ?>
+
+                        <?php echo $paginateOftype; ?>
+
+                        <?php if($_GET['pages'] < $totalLinks - 1):
+                                $next_page = $_GET['pages'] + 1 ?>
+                        <li><a
+                                href='productOfprotypes?type_id=<?php echo $_GET['type_id'] ?>?&&pages=<?php echo $next_page  ?>'><i
+                                    class="fa fa-angle-right"></i></a></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <!-- /store bottom filter -->
             </div>
-            <?php }?>
+            <?php } ?>
             <!-- /STORE -->
         </div>
         <!-- /row -->

@@ -7,7 +7,7 @@
 		$id = $_GET['id'];
 	}		
 	$manufactures = new Manufactures;
-	$getProductById = $product->getProductById($id); 		
+	$getProductById = $product->getProductById($id); 
 	?>
 
 <!-- BREADCRUMB -->
@@ -380,9 +380,11 @@
                 </div>
             </div>
             <?php 
-					foreach($getProductById as $va):
-					foreach($getAllProducts as $v):						
-					if($va['type_id'] == $v['type_id'] && $v['menu_id'] == $va['menu_id']): ?>
+                $count = 0;
+                    foreach($getAllProducts as $v):	
+					foreach($getProductById as $va):							
+					if($va['type_id'] == $v['type_id'] && $v['menu_id'] == $va['menu_id'] && $v['name'] != $va['name'] && $count < 4):
+                    $count++; ?>
             <!-- product -->
             <div class="col-md-3 col-xs-6" style="margin-bottom:50px">
                 <div class="product">
@@ -390,6 +392,7 @@
                         <img src="./img/<?php echo $v['image'] ?>" alt="" style="width:260px; height:260px;">
                         <div class="product-label">
                             <span class="sale">-<?php echo $v['discount'] ?>%</span>
+                            <span class="new">NEW</span>
                         </div>
                     </div>
                     <div class="product-body">

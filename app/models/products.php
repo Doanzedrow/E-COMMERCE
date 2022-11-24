@@ -70,4 +70,106 @@ class Product extends Db{
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+    public function getsearchProducts($page, $perPage,$keyword)
+    {
+        $fistLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE `name`  LIKE ? LIMIT $fistLink,$perPage ");
+        $keyword = "%$keyword%";
+        $sql->bind_param("s",$keyword);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+    public function getProtypeByIdPage($page, $perPage,$id)
+    {
+        $fistLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE `type_id` = ? LIMIT $fistLink,$perPage ");
+        $sql->bind_param("i",$id);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+    public function getManuByIdPage($page, $perPage,$type_id,$manu_id)
+    {
+        $fistLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE `type_id` = ? and `menu_id` = ? LIMIT $fistLink,$perPage ");
+        $sql->bind_param("ii",$type_id,$manu_id);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+    public function paginateOftype($url, $total,$page, $perPage,$offset,$id)
+    {
+        if($total <= 0) {
+            return "";
+        }
+        $totalLinks = ceil($total/$perPage);
+        if($totalLinks <= 1) {
+        return "";
+        }
+        $from = $page - $offset;
+        $to = $page + $offset;
+        //$offset quy định số lượng link hiển thị ở 2 bên trang hiện hành
+        //$offset = 2 và $page = 5,lúc này thanh phân trang sẽ hiển thị: 3 4 5 6 7
+        if($from <= 0) {
+        $from = 1;
+        $to = $offset * 2;
+        }
+        if($to > $totalLinks) {
+        $to = $totalLinks;
+        }       
+        $links = array();
+        $link = "";
+        for ($j = $from; $j <= $to; $j++) {
+            
+            if($j != $_GET['pages'])
+            {
+                $link = $link."<li><a href = '$url?type_id=$id&&pages=$j'> $j </a>";              
+            }
+            else
+            {
+                $link = $link."<li class='active'><a href = '$url?type_id=$id&&pages=$j'> $j </a></li>";
+            }           
+        }
+        return $link; 
+    }
+    public function paginateOfSearch($url, $total,$page, $perPage,$offset,$keyword,$type_prd)
+    {
+        if($total <= 0) {
+            return "";
+        }
+        $totalLinks = ceil($total/$perPage);
+        if($totalLinks <= 1) {
+        return "";
+        }
+        $from = $page - $offset;
+        $to = $page + $offset;
+        //$offset quy định số lượng link hiển thị ở 2 bên trang hiện hành
+        //$offset = 2 và $page = 5,lúc này thanh phân trang sẽ hiển thị: 3 4 5 6 7
+        if($from <= 0) {
+        $from = 1;
+        $to = $offset * 2;
+        }
+        if($to > $totalLinks) {
+        $to = $totalLinks;
+        }       
+        $links = array();
+        $link = "";
+        for ($j = $from; $j <= $to; $j++) {
+            
+            if($j != $_GET['pages'])
+            {
+                $link = $link."<li><a href = '$url?type_prd=$type_prd&&keyword=$keyword&&pages=$j'> $j </a>";              
+            }
+            else
+            {
+                $link = $link."<li class='active'><a href = '$url?type_prd=$type_prd&&keyword=$keyword&&pages=$j'> $j </a></li>";
+            }           
+        }
+        return $link; 
+    }
+
 }
