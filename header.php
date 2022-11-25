@@ -90,7 +90,7 @@ session_start();
                             </a>
                             <div class="noidung_dropdown">
                                 <?php if(isset($_SESSION['user'])): ?>  
-                                <a href="./information.php">Information</a>                              
+                                <a href="./information.php?id_user= <?php echo $_SESSION['user']; ?>">Information</a>                              
                                 <a href="./logout/logout.php">Logout</a>     
                                                        
                                <?php else: ?>
@@ -149,7 +149,7 @@ session_start();
                             <?php $link = null; ?>
                                     <?php if(isset($_SESSION['user']))
                                     {
-                                        $link = "ViewWishlist.php";
+                                        $link = "ViewWishlist.php?pages=1";
                                     } ?>
                                 <a href="<?php echo $link; ?>" onclick="display()">
                                     <i class="fa fa-heart-o"></i>

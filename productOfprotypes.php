@@ -125,7 +125,7 @@
                                 <?php $link1 = null; 
                                     if(isset($_SESSION['user']))
                                     {
-                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id'];
+                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id']."&&pages=".$_GET['pages'];
                                     } ?>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><a href="<?php echo $link1; ?>"

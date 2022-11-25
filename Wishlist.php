@@ -19,11 +19,11 @@ if($page == 'index.php')
 }
 else if($page == 'productOfprotypes.php')
 {
-    header('location:'.$page.'?type_id='.$_GET['type_id']);
+    header('location:'.$page.'?type_id='.$_GET['type_id']."&&pages=".$_GET['pages']);
 }
 else if($page == 'result.php')
 {
-    header('location:'.$page."?type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword']);
+    header('location:'.$page."?type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword'])."pages=1";
 }
 else
 {

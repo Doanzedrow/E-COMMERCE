@@ -101,6 +101,51 @@ class Product extends Db{
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+    public function getProductByIdPage($id,$page, $perPage)
+    {
+        $fistLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE id = ? LIMIT $fistLink,$perPage ");
+        $sql->bind_param("i",$id);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+    public function paginateOfWish($url, $total,$page, $perPage,$offset)
+    {
+        if($total <= 0) {
+            return "";
+        }
+        $totalLinks = ceil($total/$perPage);
+        if($totalLinks <= 1) {
+        return "";
+        }
+        $from = $page - $offset;
+        $to = $page + $offset;
+        //$offset quy định số lượng link hiển thị ở 2 bên trang hiện hành
+        //$offset = 2 và $page = 5,lúc này thanh phân trang sẽ hiển thị: 3 4 5 6 7
+        if($from <= 0) {
+        $from = 1;
+        $to = $offset * 2;
+        }
+        if($to > $totalLinks) {
+        $to = $totalLinks;
+        }       
+        $links = array();
+        $link = "";
+        for ($j = $from; $j <= $to; $j++) {
+            
+            if($j != $_GET['pages'])
+            {
+                $link = $link."<li><a href = '$url?pages=$j'> $j </a>";              
+            }
+            else
+            {
+                $link = $link."<li class='active'><a href = '$url?pages=$j'> $j </a></li>";
+            }           
+        }
+        return $link; 
+    }
     public function paginateOftype($url, $total,$page, $perPage,$offset,$id)
     {
         if($total <= 0) {

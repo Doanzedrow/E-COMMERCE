@@ -78,7 +78,7 @@ if(isset($_POST['btn-hoantat']))
                     </div>
                     <label class="form-label" style="padding-right:20px">Phái:</label>
                     <div class="form-check form-check-inline">                      
-                        <input class="form-check-input" type="radio" name="phai" id="nam" value="1" checked="checked>   
+                        <input class="form-check-input" type="radio" name="phai" id="nam" value="1" checked="checked">   
                         <label class="form-check-label" for="nam">Nam</label>                   
                     </div>
                     <div class="form-check form-check-inline">                                         

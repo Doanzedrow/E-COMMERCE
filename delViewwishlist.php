@@ -7,5 +7,5 @@ if(isset($_GET['id'])){
 else{
     unset($_SESSION['wishlist']);
 }
-header('location:ViewWishlist.php');
+header('location:ViewWishlist.php?pages='.$_GET['pages']);
 //header('location:index.php');
