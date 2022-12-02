@@ -71,12 +71,15 @@ if(isset($_POST['btn-dangnhap']))
                         <p>Bạn Chưa Có Tài Khoản? <a href="register.php">Đăng Ký</a></p>
                     </div>
                 </form>
-                <h3>Đăng Nhập Bằng Mạng Xã Hội</h3>
+                <div class="input-form">
+                        <p>Đăng nhập với tư cách admin <a href="../admin/loginadmin.php">Vào đây</a></p>
+                    </div>
+                <!-- <h3>Đăng Nhập Bằng Mạng Xã Hội</h3>
                 <ul class="icon-dang-nhap">
                     <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
                     <li><i class="fa fa-google" aria-hidden="true"></i></li>
                     <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
         <!--Kết Thúc Phần Nội Dung-->

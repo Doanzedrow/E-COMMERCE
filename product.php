@@ -113,7 +113,9 @@
 									?>
                 <ul class="product-links">
                     <li>Category:</li>
-                    <li><a href="./productOfprotypes.php?type_id=<?php echo $v['type_id'] ?>"><?php echo $v['type_name'] ?></a></li>
+                    <li><a
+                            href="./productOfprotypes.php?type_id=<?php echo $v['type_id'] ?>"><?php echo $v['type_name'] ?></a>
+                    </li>
                 </ul>
                 <?php endif; endforeach; endforeach; ?>
                 <ul class="product-links">
@@ -152,20 +154,99 @@
                     </div>
                     <!-- /tab1  -->
 
+                    <?php 
+                        
+                            if($v['type_id'] == 2):
+                        ?>
                     <!-- tab2  -->
                     <div id="tab2" class="tab-pane fade in">
                         <div class="row">
                             <div class="col-md-12">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </p>
+                                <div>
+                                    Kích thước màn hinh: <?php echo $v['kichthuocmanhinh'] ?>
+                                </div>
+                                <div>
+                                    Ram: <?php echo $v['ram'] ?>
+                                </div>
+                                <div>
+                                    Rom: <?php echo $v['rom'] ?>
+                                </div>
+                                <div>
+                                    Pin: <?php echo $v['pin'] ?>
+                                </div>
+                                <div>
+                                    Hệ điều hành: <?php echo $v['hedieuhanh'] ?>
+                                </div>
+                                <div>
+                                    Card: <?php echo $v['card'] ?>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <?php  endif; ?>
+                    <?php 
+                        
+                            if($v['type_id'] == 1):
+                        ?>
+                    <!-- tab2  -->
+                    <div id="tab2" class="tab-pane fade in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table-profile table-striped table">
+                                    <tr>
+                                        <td>
+                                            <h3>Kích thước màn hinh:</h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['kichthuocmanhinh'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Ram: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['ram'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Rom: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php  echo $v['rom'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>Pin: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo  $v['pin'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>Hệ điều hành: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo  $v['hedieuhanh'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>Card: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo  $v['chip'] ?></h4>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <?php  endif; ?>
                     <!-- /tab2  -->
                     <?php endforeach; ?>
                     <!-- tab3  -->
@@ -411,7 +492,7 @@
                         <div class="product-rating">
                         </div>
                         <?php $link1 = null; ?>
-                         <?php   if(isset($_SESSION['user']))
+                        <?php   if(isset($_SESSION['user']))
                         {
                             $link1 = 'wishlist.php?id='.  $v['id']."&&page=product.php";
                         } ?>

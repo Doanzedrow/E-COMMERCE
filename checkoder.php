@@ -20,6 +20,7 @@ require "./app/models/db.php";
             if($p['id' ]== $k)
             {
                 $pri = (int)(($p['price'] - $p['price'] * $p['discount'] /100) *$value);
+                //insertCheckout ($fName,$lName,$email,$address,$city,$country,$phone,$id,$shipping,$qty_buy,$money,$other_node)
                 $insertCheckout = $checkout->insertCheckout($fName,$lName,$email,$address,$city, $country,$phone,$k,0,$value,$pri, $note);
                 header('location:../blank.php');
             }
