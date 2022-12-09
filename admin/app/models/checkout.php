@@ -8,4 +8,12 @@ class CheckOut extends Db{
        return $sql->execute(); //return an object
         
     }
+    public function getAllCheckout()
+    {
+        $sql = self::$connection->prepare("SELECT * FROM checkout,products where checkout.id = products.id ORDER BY checkout_id");
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
 }

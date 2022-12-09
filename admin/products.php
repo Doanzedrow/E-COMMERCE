@@ -61,12 +61,48 @@
                             <th style="width: 8%" class="text-center">
                                 Protypes
                             </th>
-                            <!-- <th style="width: 20%">
+                            <th style="width: 20%">
                                 Feature
                             </th>
                             <th style="width: 20%">
                                 Created_at
-                            </th> -->
+                            </th>
+                            <th style="width: 20%">
+                                Discount
+                            </th>
+                            <th style="width: 20%">
+                                Qty_sold
+                            </th>
+                            <th style="width: 20%">
+                                KichThuocManHinh
+                            </th>
+                            <th style="width: 20%">
+                                Chip
+                            </th>
+                            <th style="width: 20%">
+                                Ram
+                            </th>
+                            <th style="width: 20%">
+                                Rom
+                            </th>
+                            <th style="width: 20%">
+                                Pin
+                            </th>
+                            <th style="width: 20%">
+                                DoPhanGiai
+                            </th>
+                            <th style="width: 20%">
+                                CongketNoi
+                            </th>
+                            <th style="width: 20%">
+                                CongSuat
+                            </th>
+                            <th style="width: 20%">
+                                HeDieuHanh
+                            </th>
+                            <th style="width: 20%">
+                                Cart
+                            </th>
                             <th style="width: 20%">
                                 Action
                             </th>
@@ -96,19 +132,55 @@
                             <td>
                             <?php echo $value['type_name']?>
                             </td> 
-                            <!-- <td>
-                                feture
-                            </td>
                             <td>
-                                created_at
-                            </td> -->
+                            <?php echo $value['feature']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['created_at']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['discount']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['qty_sold']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['kichthuocmanhinh']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['chip']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['ram']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['rom']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['pin']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['dophangiai']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['congketnoi']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['congsuat']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['hedieuhanh']?>
+                            </td> 
+                            <td>
+                            <?php echo $value['card']?>
+                            </td> 
                             <td class="project-actions text-left">
                                 <a class="btn btn-info btn-sm" href="#">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Edit
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="#">
+                                <a class="btn btn-danger btn-sm" href="delproduct.php?id=<?php echo $value['id']?>">
                                     <i class="fas fa-trash">
                                     </i>
                                     Delete

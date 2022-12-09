@@ -73,10 +73,60 @@ include './sidenar.php';
                                 <option value="<?php echo $va['type_id'] ?>"><?php echo $va['type_name'] ?></option>
                                 <?php endforeach; ?>
                                 </select>
-                            </div>
+                            </div>                          
                             <div class="form-group">
                                 <label for="inputClientCompany">Feature</label>
                                 <input name="feature" type="checkbox" id="inputClientCompany" class="form-control" row="4"></input>
+                            </div>
+
+                               <!--  -->
+                            <div class="form-group">
+                                <label for="inputdiscount">Discount</label>
+                                <input name="discount" type="text" id="inputdiscount" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputqty_sold">Qty_sold</label>
+                                <input name="qty_sold" type="text" id="inputqty_sold" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputkichthuocmanhinh">Kichthuocmanhinh</label>
+                                <input name="kichthuocmanhinh" type="text" id="inputkichthuocmanhinh" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputchip">Chip</label>
+                                <input name="chip" type="text" id="inputchip" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputRam">Ram</label>
+                                <input name="ram" type="text" id="inputRam" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputRom">Rom</label>
+                                <input name="rom" type="text" id="inputRom" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputpin">Pin</label>
+                                <input name="pin" type="text" id="inputpin" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputdophangiai">Dophangiai</label>
+                                <input name="dophangiai" type="text" id="inputdophangiai" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputcongketnoi">Congketnoi</label>
+                                <input name="congketnoi" type="text" id="inputcongketnoi" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputcongsuat">Congsuat</label>
+                                <input name="congsuat" type="text" id="inputcongsuat" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputhedieuhanh">Hedieuhanh</label>
+                                <input name="hedieuhanh" type="text" id="inputhedieuhanh" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputcard">Card</label>
+                                <input name="card" type="text" id="inputcard" class="form-control">
                             </div>
                         </div>
                         <!-- /.card-body -->

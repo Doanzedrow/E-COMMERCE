@@ -2,12 +2,16 @@
 include './app/models/db.php';
 include './app/models/products.php'; 
 include './app/models/protypes.php'; 
+include './app/models/user.php'; 
+include './app/models/personinfor.php'; 
 include './app/models/manufactures .php'; 
+include './app/models/checkout.php'; 
 $product = new Product;
 $manufacture = new Manufactures;
 $protype = new protypes;
-
-
+$user = new User;
+$personinfor = new Personinfor;
+$checkout = new CheckOut;
 ?>
 
 
