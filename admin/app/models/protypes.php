@@ -2,7 +2,7 @@
 class protypes extends Db{
     public function getAllProtypes()
     {
-        $sql = self::$connection->prepare("SELECT * FROM protypes ORDER BY type_id");
+        $sql = self::$connection->prepare("SELECT * FROM protypes ORDER BY type_id DESC");
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

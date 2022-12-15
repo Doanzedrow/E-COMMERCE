@@ -2,7 +2,7 @@
 class Manufactures extends Db{
     public function getAllManufactures()
     {
-        $sql = self::$connection->prepare("SELECT * FROM manufactures ORDER BY manu_id");
+        $sql = self::$connection->prepare("SELECT * FROM manufactures ORDER BY manu_id DESC");
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

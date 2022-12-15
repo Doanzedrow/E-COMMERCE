@@ -16,4 +16,20 @@ class CheckOut extends Db{
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+    public function delcheckout($id)
+    {
+ 
+        $sql = self::$connection->prepare("DELETE FROM `checkout` WHERE `checkout_id`=?");
+        $sql->bind_param("i",$id);
+        return $sql->execute(); //return an object
+       
+    }
+    public function editcheckout($fName,$lName,$email,$address,$city,$country,$phone,$id,$shipping,$qty_buy,$money,$other_node)
+    {        
+        $sql = self::$connection->prepare("UPDATE `checkout` 
+        SET `fName`=?,`lName`=?,`email`=?,`address`=?,`city`=?,`country`=?,`phone`=?,`id`=?,`shiping`=?,
+        `qty_buy`=?,`money`=?,`other_node`=?");
+        $sql->bind_param("sssssssiiiis",$fName,$lName,$email,$address,$city,$country,$phone,$id,$shipping,$qty_buy,$money,$other_node);
+       return $sql->execute(); //return an object
+    }
 }

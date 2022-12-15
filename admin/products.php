@@ -175,7 +175,7 @@
                             <?php echo $value['card']?>
                             </td> 
                             <td class="project-actions text-left">
-                                <a class="btn btn-info btn-sm" href="#">
+                                <a class="btn btn-info btn-sm" href="edit_product.php?id=<?php echo $value['id']?>">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Edit

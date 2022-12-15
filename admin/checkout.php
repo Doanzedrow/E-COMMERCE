@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>User</h1>
+            <h1>Checkout</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">User</li>
+              <li class="breadcrumb-item active">Checkout</li>
             </ol>
           </div>
         </div>
@@ -27,7 +27,7 @@
       <!-- Default box -->
       <div class="card">
       <div class="card-header">
-                <h3 class="card-title">User</h3>
+                <h3 class="card-title">Checkout</h3>
                 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -126,12 +126,12 @@
                       <?php echo $va['other_node'] ?>
                       </td>                    
                       <td class="project-actions text-left">
-                          <a class="btn btn-info btn-sm" href="#">
+                          <a class="btn btn-info btn-sm" href="editCheckout.php?checkout_id=<?php echo $va['checkout_id'] ?>">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Edit
                           </a>
-                          <a class="btn btn-danger btn-sm" href="#">
+                          <a class="btn btn-danger btn-sm" href="delCheckout.php?checkout_id=<?php echo $va['checkout_id'] ?>">
                               <i class="fas fa-trash">
                               </i>
                               Delete
