@@ -3,16 +3,16 @@ class User extends Db
 {
     public function getUser ()
     {
-        $sql = self::$connection->prepare("SELECT * FROM user ");
+        $sql = self::$connection->prepare("SELECT * FROM user ORDER BY id_user DESC");
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
-    public function getIdUser ($name_user)
+    public function getIdUser($id)
     {
-        $sql = self::$connection->prepare("SELECT * FROM user where `username` = ?");
-        $sql->bind_param('s',$name_user);
+        $sql = self::$connection->prepare("SELECT * FROM user where `id_user` = ? ");
+        $sql->bind_param('i',$id);
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -44,5 +44,19 @@ class User extends Db
         {
             return false;
         }
+    }
+    public function delUser($id)
+    {
+ 
+        $sql = self::$connection->prepare("DELETE FROM `user` WHERE `id_user`=?");
+        $sql->bind_param("i",$id);
+        return $sql->execute(); //return an object
+       
+    }
+    public function EditUser($id_user,$user,$pass)
+    {
+        $sql = self::$connection->prepare("UPDATE `user` SET `username` = ?,`password`=? WHERE`id_user` = ?");
+        $sql->bind_param("ssi",$user,$pass,$id_user);
+        return $sql->execute(); //return an object
     }
 }

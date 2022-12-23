@@ -102,7 +102,16 @@
                             $link1 = 'wishlist.php?id='.  $v['id']."&&page=product.php";
                         } ?>
                 <ul class="product-btns">
-                    <li><a href="<?php echo $link1; ?>" onclick="display()"><i class="fa fa-heart-o"></i> add to
+                    <li><a href="<?php echo $link1; ?>" onclick="display()"><i class="fa fa-heart-o" <?php if(isset($_SESSION['wishlist'])){
+                     foreach ($_SESSION['wishlist'] as $key => $value)
+                     {
+                        if ($v['id'] == $key)
+                        {
+                          echo 'style="color:red"';
+                        }                                                            
+                     }
+                    }
+                         ?>></i> add to
                             wishlist</a></li>
                     <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
                 </ul>
@@ -154,40 +163,194 @@
                     </div>
                     <!-- /tab1  -->
 
-                    <?php 
-                        
-                            if($v['type_id'] == 2):
-                        ?>
+                    <?php                        
+                        if($v['type_id'] == 2):
+                    ?>
                     <!-- tab2  -->
                     <div id="tab2" class="tab-pane fade in">
                         <div class="row">
                             <div class="col-md-12">
-                                <div>
-                                    Kích thước màn hinh: <?php echo $v['kichthuocmanhinh'] ?>
-                                </div>
-                                <div>
-                                    Ram: <?php echo $v['ram'] ?>
-                                </div>
-                                <div>
-                                    Rom: <?php echo $v['rom'] ?>
-                                </div>
-                                <div>
-                                    Pin: <?php echo $v['pin'] ?>
-                                </div>
-                                <div>
-                                    Hệ điều hành: <?php echo $v['hedieuhanh'] ?>
-                                </div>
-                                <div>
-                                    Card: <?php echo $v['card'] ?>
-                                </div>
+                                <table class="table-profile table-striped table">
+                                    <tr>
+                                        <td>
+                                            <h3>Kích thước màn hinh: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['kichthuocmanhinh'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Ram: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['ram'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Rom: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['rom'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Pin: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['pin'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Hệ điều hành: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['hedieuhanh'] ?> </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Card: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['card'] ?></h4>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php  endif; ?>
+                    <?php                        
+                        if($v['type_id'] == 3):
+                    ?>
+                    <!-- tab2  -->
+                    <div id="tab2" class="tab-pane fade in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table-profile table-striped table">
+                                    <tr>
+                                        <td>
+                                            <h3>Chip:</h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['chip'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Pin: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['pin'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Cổng kết nối: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['congketnoi'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Công suất: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['congsuat'] ?></h4>
+                                        </td>
+                                    </tr>
+                                </table>
+
                             </div>
                         </div>
                     </div>
                     <?php  endif; ?>
-                    <?php 
-                        
-                            if($v['type_id'] == 1):
-                        ?>
+
+
+                    <?php                        
+                        if($v['type_id'] == 4):
+                    ?>
+                    <!-- tab2  -->
+                    <div id="tab2" class="tab-pane fade in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table-profile table-striped table">
+                                    <tr>
+                                        <td>
+                                            <h3>Kích thước màn hinh: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['kichthuocmanhinh'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Độ phân giải: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['dophangiai'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Hệ điều hành: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['hedieuhanh'] ?> </h4>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php  endif; ?>
+
+
+                    <?php                        
+                        if($v['type_id'] == 5):
+                    ?>
+                    <!-- tab2  -->
+                    <div id="tab2" class="tab-pane fade in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table-profile table-striped table">
+                                    <tr>
+                                        <td>
+                                            <h3>Kích thước màn hinh: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"><?php echo $v['kichthuocmanhinh'] ?></h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3> Độ phân giải: </h3>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-left"> <?php echo $v['dophangiai'] ?></h4>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php  endif; ?>
+
+
+                    <?php                     
+                    if($v['type_id'] == 1):
+                    ?>
                     <!-- tab2  -->
                     <div id="tab2" class="tab-pane fade in">
                         <div class="row">

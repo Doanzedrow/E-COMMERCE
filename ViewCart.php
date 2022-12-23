@@ -75,7 +75,7 @@ include 'header.php' ?>
                                         $price += ($v['price'] - $v['price'] * number_format($v['discount']) /100) *$values;
                                         ?>
                                          <?php endif; endforeach; endforeach; endif;  ?>
-										<strong class="price"><span></span><?php echo number_format( $price) ?> </strong>
+										<strong class="price"><span></span><?php echo number_format($price) ?> </strong>
 										<?php endif; ?>
 									</li>
 								</ul>

@@ -28,7 +28,7 @@ else if($page == 'productOfprotypes.php')
 }
 else if($page == 'result.php')
 {
-    header('location:'.$page."?type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword']);
+    header('location:'.$page."?type_prd=".$_GET['type_prd']."&&keyword=".$_GET['keyword']."&&pages=".$_GET['pages']);
 }
 else
 {

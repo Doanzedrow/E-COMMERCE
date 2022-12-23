@@ -5,33 +5,23 @@ require './app/models/checkout.php';
 $checkout = new CheckOut;
 if(isset($_POST['checkout_id']))
 {
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
-    $image = $_FILES['image']['name'];
-    $manu_id = number_format($_POST['manu_id']);
-    $type_id = $_POST['type_id'];
-    $feature = isset($_POST['feature'])?1:0;
-    $created_at= date("Y-m-d");
-    $discount= $_POST['discount'];
-    $qty_sold= $_POST['qty_sold'];
-    $kichthuocmanhinh= $_POST['kichthuocmanhinh'];
-    $chip= $_POST['chip'];
-    $ram= $_POST['ram'];
-    $rom= $_POST['rom'];
-    $pin= $_POST['pin'];
-    $dophangiai= $_POST['dophangiai'];
-    $congketnoi= $_POST['congketnoi'];
-    $congsuat= $_POST['congsuat'];
-    $hedieuhanh= $_POST['hedieuhanh'];
-    $card = $_POST['card'];
-    $id=$_POST['id'];
+    $fName = $_POST['fName'];
+    $lName = $_POST['lName'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $city = $_POST['city'];
+    $country = $_POST['country'];
+    $phone = $_POST['phone'];
+    $id = $_POST['id'];
+    $shiping = $_POST['shiping'];
+    $qty_buy = $_POST['qty_buy'];
+    $money = $_POST['money'];
+    $other_node = $_POST['other_node'];
+    $checkout_id = $_POST['checkout_id'];
+   
+   
     //xu ly them
-    $product->editproduct($name,$manu_id,$type_id,$price,$image,$description,$feature,$discount,$qty_sold,$kichthuocmanhinh,$chip,$ram,$rom,$pin,$dophangiai,$congketnoi,$congsuat,$hedieuhanh,$card,$id);
-    
-    //xu ly upload
-    $target_dir = "../img/";
-    $target_file = $target_dir . basename($_FILES['image']['name']);
-    move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-    header("location:products.php");
+    $checkout->editcheckout($fName,$lName,$email,$address,$city,$country,$phone,$id,$shiping,$qty_buy,$money,$other_node,$checkout_id);
+   
+    header("location:checkout.php");
 }

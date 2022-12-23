@@ -40,15 +40,16 @@ include './sidenar.php';
                                 <?php
                                 if (isset($_GET['manu_id'])) {
                                 ?>
-                                    <label for="inputName">Manufactures name </label>
-                                    <?php
+                                <label for="inputName">Manufactures name </label>
+                                <?php
                                     $getAllManufactures = $manufacture->getAllManufactures();
                                     foreach ($getAllManufactures as $value) {
 
                                         if ($value['manu_id'] == $_GET['manu_id']) {
                                     ?>
-                                            <input name="namemanu" type="text" id="inputName" class="form-control" value="<?php echo $value['manu_name'] ?>">
-                                            <input type="hidden" name="manu_id" value="<?php echo $value['manu_id'] ?>">
+                                <input name="namemanu" type="text" id="inputName" class="form-control"
+                                    value="<?php echo $value['manu_name'] ?>">
+                                <input type="hidden" name="manu_id" value="<?php echo $value['manu_id'] ?>">
                                 <?php }
                                     }
                                 }
@@ -56,15 +57,16 @@ include './sidenar.php';
                                 <?php
                                 if (isset($_GET['type_id'])) {
                                 ?>
-                                    <label for="inputName">Protypes name </label>
-                                    <?php
+                                <label for="inputName">Protypes name </label>
+                                <?php
                                     $getAllProtypes = $protype->getAllProtypes();
                                     foreach ($getAllProtypes as $value) {
 
                                         if ($value['type_id'] == $_GET['type_id']) {
                                     ?>
-                                            <input name="type_name" type="text" id="inputName" class="form-control" value="<?php echo $value['type_name'] ?>">
-                                            <input type="hidden" name="type_id" value="<?php echo $value['type_id'] ?>">
+                                <input name="type_name" type="text" id="inputName" class="form-control"
+                                    value="<?php echo $value['type_name'] ?>">
+                                <input type="hidden" name="type_id" value="<?php echo $value['type_id'] ?>">
                                 <?php }
                                     }
                                 }

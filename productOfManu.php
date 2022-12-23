@@ -1,30 +1,8 @@
-<?php 
-$a= 0;
-foreach($_POST['thuonghieu'] as $th){
-    foreach($getAllManufactures as $m){
-        foreach($getProtypeById as $i){
-            if($th == $m['manu_name'] && $m['manu_id'] == $i['menu_id']){
-                    $a++;
-            }   
-        }               
-    }
-}
-     ?>
-<div id="store" class="col-md-9">
-
-                <!-- store top filter -->
-
-                <!-- /store top filter -->
-
-                <!-- store products -->
-                <div class="row">
-                    <?php      
-                     $total = 0;    
-                    foreach($_POST['thuonghieu'] as $th):
-                        foreach($getAllManufactures as $m):
-                            if($th == $m['manu_name']):
-                                $getManuByIdPage = $product->getManuByIdPage($pages,$perPage,$id,$m['manu_id']);
-                            foreach($getManuByIdPage as $v):	                  					  						                 
+<div class="row">
+                    <?php          
+						foreach($getProtypeByIdPage as $v):	  
+						foreach($getAllProtypes as $va):
+						if($v['type_id'] == $va['type_id']):		                        
 						?>
                     <!-- product -->
                     <div class="col-md-4 col-xs-6" style="margin-bottom:50px">
@@ -36,12 +14,8 @@ foreach($_POST['thuonghieu'] as $th){
                                     <span class="new">NEW</span>
                                 </div>
                             </div>
-                            
                             <div class="product-body">
-                                <?php foreach($getAllProtypes as $va):
-						            if($v['type_id'] == $va['type_id']):	 ?>
                                 <p class="product-category"><?php echo $va['type_name']?></p>
-                                <?php endif; endforeach; ?>
                                 <h3 class="product-name"><a
                                         href="<?php echo 'product.php?id='.$v['id'] ?>"><?php echo substr($v['name'],0,23) ?></a>
                                 </h3>
@@ -60,11 +34,20 @@ foreach($_POST['thuonghieu'] as $th){
                                 <?php $link1 = null; 
                                     if(isset($_SESSION['user']))
                                     {
-                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id'];
+                                        $link1 = 'wishlist.php?id='.  $v['id']."&&page=productOfprotypes.php"."&&type_id=".$_GET['type_id']."&&pages=".$_GET['pages'];
                                     } ?>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><a href="<?php echo $link1; ?>"
-                                            onclick="display()"><i class="fa fa-heart-o"></i><span class="tooltipp">add
+                                            onclick="display()"><i class="fa fa-heart-o" <?php if(isset($_SESSION['wishlist'])){
+                                             foreach ($_SESSION['wishlist'] as $key => $value)
+                                            {
+                                                if ($v['id'] == $key)
+                                                {
+                                                    echo 'style="color:red"';
+                                                }                                                                 
+                                            }
+                                          }
+                                             ?>></i><span class="tooltipp">add
                                                 to
                                                 wishlist</span></a></button>
                                     <button class="add-to-compare"><i class="fa fa-exchange"></i><span
@@ -93,14 +76,13 @@ foreach($_POST['thuonghieu'] as $th){
                         </div>
                     </div>
                     <!-- /product -->
-                    <?php   endforeach; endif; endforeach;  endforeach; ?>
+                    <?php endif; endforeach; endforeach; ?>
 
                     <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 
                 </div>
                 <!-- /store products -->
-                <?php
-                $paginateOftype = $product->paginateOftype($url,$a,$pages,$perPage,1,$id); ?>
+
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
                     <span class="store-qty">Showing 20-100 products</span>
@@ -122,5 +104,3 @@ foreach($_POST['thuonghieu'] as $th){
                         <?php endif; ?>
                     </ul>
                 </div>
-                <!-- /store bottom filter -->
-            </div>

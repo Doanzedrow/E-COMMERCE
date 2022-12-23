@@ -27,7 +27,6 @@ include 'sidenar.php';
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Personinfor</h3>
-
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -41,6 +40,9 @@ include 'sidenar.php';
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
+                            <th style="width: 20%">
+                                User Name
+                            </th>
                             <th style="width: 30%">
                                 Full Name
                             </th>
@@ -62,32 +64,36 @@ include 'sidenar.php';
                         <?php $getPer = $personinfor->getPersonInfor();
                         foreach ($getPer as $va) :
                         ?>
-                            <tr>
-                                <td>
-                                    <?php echo $va['fullname'] ?>
-                                </td>
-                                <td>
-                                    <?php echo $va['ngaysinh'] ?>
-                                </td>
-                                <td>
-                                    <?php echo $va['sdt'] ?>
-                                </td>
-                                <td>
-                                    <?php echo $va['email'] ?>
-                                </td>
-                                <td class="project-actions text-left">
-                                    <a class="btn btn-info btn-sm" href="#">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <?php echo $va['username'] ?>
+                            </td>
+                            <td>
+                                <?php echo $va['fullname'] ?>
+                            </td>
+                            <td>
+                                <?php echo $va['ngaysinh'] ?>
+                            </td>
+                            <td>
+                                <?php echo $va['sdt'] ?>
+                            </td>
+                            <td>
+                                <?php echo $va['email'] ?>
+                            </td>
+                            <td class="project-actions text-left">
+                                <a class="btn btn-info btn-sm" href="editinfor.php?id_user=<?php echo $va['id_user'] ?>">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm"
+                                    href="delpersoninfo.php?id=<?php echo $va['id_user'] ?>">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

@@ -5,12 +5,14 @@ include 'header.php' ?>
 $perPage = 6;
 $pages = $_GET['pages'];
 $total = 0;
-foreach($_SESSION['wishlist'] as $v)
+if(isset($_SESSION['wishlist']))
 {
-        
-    $total++;
-}
-                                                     
+    foreach($_SESSION['wishlist'] as $v)
+    {
+            
+        $total++;
+    }
+}                                                     
 $totalLinks = ceil($total/$perPage);
 $url = $_SERVER['PHP_SELF'];
 

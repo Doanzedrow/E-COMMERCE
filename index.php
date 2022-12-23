@@ -94,13 +94,21 @@
                                         } ?>
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><a
-                                                    href="<?php echo $link1; ?>" onclick="display()"><i
-                                                        class="fa fa-heart-o"></i><span class="tooltipp">add to
+                                                    href="<?php echo $link1; ?>" onclick="display()"><i  
+                                                    class="fa fa-heart"                                                  
+                                                        <?php if(isset($_SESSION['wishlist'])){
+                                                                foreach ($_SESSION['wishlist'] as $key => $value)
+                                                                {
+                                                                    if ($v['id'] == $key)
+                                                                    {
+                                                                        echo 'style="color:red"';
+                                                                    }                                                                 
+                                                                }
+                                                            }
+                                                          ?>
+                                                        ></i><span class="tooltipp">add to
                                                         wishlist</span></a></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">quick view</span></button>
+                                           
                                         </div>
                                     </div>
                                     <?php $link = null; ?>
@@ -200,12 +208,20 @@
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><a
                                             href="<?php echo $link1; ?>" onclick="display()"><i
-                                                        class="fa fa-heart-o"></i><span class="tooltipp">add to
+                                                        class="fa fa-heart"
+                                                        <?php if(isset($_SESSION['wishlist'])){
+                                                                foreach ($_SESSION['wishlist'] as $key => $value)
+                                                                {
+                                                                    if ($v['id'] == $key)
+                                                                    {
+                                                                        echo 'style="color:red"';
+                                                                    }                                                                 
+                                                                }
+                                                            }
+                                                          ?>
+                                                        ></i><span class="tooltipp">add to
                                                         wishlist</span></a></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">quick view</span></button>
+                                           
                                         </div>
                                     </div>
                                     <?php $link = null; ?>

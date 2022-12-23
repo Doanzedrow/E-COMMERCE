@@ -126,7 +126,7 @@
                       <?php echo $va['other_node'] ?>
                       </td>                    
                       <td class="project-actions text-left">
-                          <a class="btn btn-info btn-sm" href="editCheckout.php?checkout_id=<?php echo $va['checkout_id'] ?>">
+                          <a class="btn btn-info btn-sm" href="checkoutedit.php?checkout_id=<?php echo $va['checkout_id'] ?>">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Edit
