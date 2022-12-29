@@ -29,7 +29,7 @@
                 <h3 class="card-title">Product</h3>
                 <a class="btn btn-success btn-sm px-3 mx-3" href="./productadd.php">
                     <i class="fas fa-plus"></i>
-                Add</a>
+                    Add</a>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -109,8 +109,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $getAllProducts = $product->getAllProducts();
-                        foreach($getAllProducts as $value):
+                        <?php
+                        $url = $_SERVER['PHP_SELF'];
+                        $pages = $_GET['pages'];
+                        $perPage = 4;
+                        $getAllProducts = $product->getAllProducts($pages,$perPage); 
+                        $total = 0;
+                        foreach($getAllProducts as $v){     
+                             $total++;
+                        }                                                        
+                        $totalLinks = ceil($total/$perPage);          
+                        $getProducts = $product->getProducts($pages,$perPage);
+                        $paginate = $product->paginate($url,$total,$pages,$perPage,1);
+                        foreach($getProducts as $value):
                         
                         ?>
                         <tr>
@@ -118,62 +129,62 @@
                                 <img style="width:50px; height:80px;" src="../img/<?php echo $value['image']?>" alt="">
                             </td>
                             <td>
-                            <?php echo $value['name']?>
+                                <?php echo $value['name']?>
                             </td>
                             <td>
-                            <?php echo number_format($value['price'])?>VND
+                                <?php echo number_format($value['price'])?>VND
                             </td>
                             <td>
-                            <?php echo substr($value['description'],0,50)?>...
+                                <?php echo substr($value['description'],0,50)?>...
                             </td>
                             <td>
-                            <?php echo $value['manu_name']?>
+                                <?php echo $value['manu_name']?>
                             </td>
                             <td>
-                            <?php echo $value['type_name']?>
-                            </td> 
+                                <?php echo $value['type_name']?>
+                            </td>
                             <td>
-                            <?php echo $value['feature']?>
-                            </td> 
+                                <?php echo $value['feature']?>
+                            </td>
                             <td>
-                            <?php echo $value['created_at']?>
-                            </td> 
+                                <?php echo $value['created_at']?>
+                            </td>
                             <td>
-                            <?php echo $value['discount']?>
-                            </td> 
+                                <?php echo $value['discount']?>
+                            </td>
                             <td>
-                            <?php echo $value['qty_sold']?>
-                            </td> 
+                                <?php echo $value['qty_sold']?>
+                            </td>
                             <td>
-                            <?php echo $value['kichthuocmanhinh']?>
-                            </td> 
+                                <?php echo $value['kichthuocmanhinh']?>
+                            </td>
                             <td>
-                            <?php echo $value['chip']?>
-                            </td> 
+                                <?php echo $value['chip']?>
+                            </td>
                             <td>
-                            <?php echo $value['ram']?>
-                            </td> 
+                                <?php echo $value['ram']?>
+                            </td>
                             <td>
-                            <?php echo $value['rom']?>
-                            </td> 
+                                <?php echo $value['rom']?>
+                            </td>
                             <td>
-                            <?php echo $value['pin']?>
-                            </td> 
+                                <?php echo $value['pin']?>
+                            </td>
                             <td>
-                            <?php echo $value['dophangiai']?>
-                            </td> 
+                                <?php echo $value['dophangiai']?>
+                            </td>
                             <td>
-                            <?php echo $value['congketnoi']?>
-                            </td> 
+                                <?php echo $value['congketnoi']?>
+                            </td>
                             <td>
-                            <?php echo $value['congsuat']?>
-                            </td> 
+                                <?php echo $value['congsuat']?>
+                            </td>
                             <td>
-                            <?php echo $value['hedieuhanh']?>
-                            </td> 
+                                <?php echo $value['hedieuhanh']?>
+                            </td>
                             <td>
-                            <?php echo $value['card']?>
-                            </td> 
+                                <?php echo $value['card']?>
+                            </td>
                             <td class="project-actions text-left">
                                 <a class="btn btn-info btn-sm" href="edit_product.php?id=<?php echo $value['id']?>">
                                     <i class="fas fa-pencil-alt">
@@ -190,6 +201,25 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>
+            <div class="store-filter clearfix">
+                <ul class="store-pagination">
+                    <?php if($_GET['pages'] > 1):
+                            $prev_page = $_GET['pages'] - 1; ?>
+                    <li><a
+                            href='products.php?pages=<?php echo $prev_page ?>'><i
+                                class="fa fa-angle-left"></i></a></li>
+                    <?php endif; ?>
+
+                    <?php echo $paginate; ?>
+
+                    <?php if($_GET['pages'] < $totalLinks - 1):
+                                $next_page = $_GET['pages'] + 1 ?>
+                    <li><a
+                            href='products.php?pages=<?php echo $next_page  ?>'><i
+                                class="fa fa-angle-right"></i></a></li>
+                    <?php endif; ?>
+                </ul>
             </div>
             <!-- /.card-body -->
         </div>

@@ -73,9 +73,8 @@ session_start();
                     <li><a href="#"><i class="fa fa-map-marker"></i>42A Lê Trọng Tấn Dĩ An Bình Dương</a></li>
                 </ul>
                 <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                    <li>
-                        
+                    
+                    <li>                
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-user-o"></i>

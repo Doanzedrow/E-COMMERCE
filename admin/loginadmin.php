@@ -11,7 +11,7 @@ if(isset($_POST['btn-dangnhap']))
     $password = $_POST['password'];
     if($admin->checkLogin($username,$password))
     {
-        $_SESSION['user'] = $username;
+        $_SESSION['admin'] = $username;
         header('location:../admin/index.php');
     }
     else

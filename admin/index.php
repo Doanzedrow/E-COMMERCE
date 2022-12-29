@@ -1,3 +1,6 @@
+<?php 
+session_start();
+if($_SESSION['admin']): ?>
 
 <?php include 'header.php';
   include 'sidenar.php';
@@ -610,4 +613,13 @@
   </div>
   
 <?php include 'footer.php' ?>
+<?php endif; ?>
+<?php
+if(!isset($_SESSION['admin']))
+{
+  var_dump($_SESSION['admin']);
+  echo "<h1 style='width:1111px;  height: 40px; text-align: center;'>ERROR 404</h1>";
+}
+?>
+
  

@@ -1,4 +1,5 @@
 <!-- Main Sidebar Container -->
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -15,8 +16,10 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
+                
+                    <a href="./loginadmin.php" class="d-block">Alexander Pierce</a>
+                                   
+           </div>
         </div>
 
         <!-- SidebarSearch Form -->
@@ -47,7 +50,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a href="products.php" class="nav-link">
+                    <a href="products.php?pages=1" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Products

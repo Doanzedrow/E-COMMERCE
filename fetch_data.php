@@ -8,10 +8,14 @@ include('database_connection.php');
 	require "./app/models/products.php";
 	require "./app/models/protypes.php";
     $product = new Product;
+    $perPage = 6;
+    $total = 0;
+    $type_filter = implode("','", $_POST["type"]);
 if(isset($_POST["action"]))
 {
-	$type_filter = implode("','", $_POST["type"]);
-	$pages_filter = implode("','", $_POST["pages"]);
+    $pages_filter = implode("','", $_POST["pages"]);
+    $total_filter = implode("','", $_POST["total"]);     
+    $fistLink = ($pages_filter - 1) * $perPage;
 	$query = "
 		SELECT * FROM products where type_id IN('".$type_filter."') 
 	";
@@ -22,7 +26,10 @@ if(isset($_POST["action"]))
 		 and menu_id IN('".$brand_filter."')
 		";
 	}
-
+   
+	$query .= "LIMIT $fistLink,$perPage"; 
+                                           
+    $totalLinks = ceil($total_filter/$perPage);
 	$statement = $connect->prepare($query);
 	$statement->execute();
 	$result = $statement->fetchAll();
@@ -67,8 +74,7 @@ if(isset($_POST["action"]))
                                         cart</button></a>                             
                             </div>
                         </div>
-                    </div>
-                    <!-- /product -->         
+                    </div>                               
 			';
 		}
 	}

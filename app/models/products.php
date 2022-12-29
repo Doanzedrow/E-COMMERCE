@@ -170,13 +170,48 @@ class Product extends Db{
         $link = "";
         for ($j = $from; $j <= $to; $j++) {
             
-            if($j != $_GET['pages'])
+            if($j != $page)
             {
                 $link = $link."<li><a href = '$url?type_id=$id&&pages=$j'> $j </a>";              
             }
             else
             {
                 $link = $link."<li class='active'><a href = '$url?type_id=$id&&pages=$j'> $j </a></li>";
+            }           
+        }
+        return $link; 
+    }
+    public function paginateOfmanu($url, $total,$page, $perPage,$offset,$id,$manu)
+    {
+        if($total <= 0) {
+            return "";
+        }
+        $totalLinks = ceil($total/$perPage);
+        if($totalLinks <= 1) {
+        return "";
+        }
+        $from = $page - $offset;
+        $to = $page + $offset;
+        //$offset quy định số lượng link hiển thị ở 2 bên trang hiện hành
+        //$offset = 2 và $page = 5,lúc này thanh phân trang sẽ hiển thị: 3 4 5 6 7
+        if($from <= 0) {
+        $from = 1;
+        $to = $offset * 2;
+        }
+        if($to > $totalLinks) {
+        $to = $totalLinks;
+        }       
+        $links = array();
+        $link = "";
+        for ($j = $from; $j <= $to; $j++) {
+            
+            if($j != $page)
+            {
+                $link = $link."<li><a href = '$url?type_id=$id&&pages=$j&&manu_id=$manu'> $j </a>";              
+            }
+            else
+            {
+                $link = $link."<li class='active'><a href = '$url?type_id=$id&&pages=$j&&manu_id=$manu'> $j </a></li>";
             }           
         }
         return $link; 

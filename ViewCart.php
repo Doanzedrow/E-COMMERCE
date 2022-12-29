@@ -82,7 +82,7 @@ include 'header.php' ?>
 							</div>
 						</div>
 						<a href="index.php"><button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button></a> 
-						<button class="btn btn-primary" type="submit">Checkout <i class="fa fa-check"></i></button>
+						<a href="checkout.php"><button class="btn btn-primary" type="submit">Checkout <i class="fa fa-check"></i></button></a>
 					</div>
 				</div>
 				<!-- END CONTENT -->

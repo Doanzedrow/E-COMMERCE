@@ -47,39 +47,7 @@ include 'header.php' ?>
             <!-- ASIDE -->
             <div id="aside" class="col-md-3">
                 <!-- aside Widget -->
-                <div class="aside">
-                    <h3 class="aside-title">Brand</h3>
-                    <div class="checkbox-filter">
-                        <?php						
-								foreach($getAllManufactures as $v):?>
-                        <form action="" method="POST">
-                            <div class="input-checkbox">
-                                <input type="checkbox" name="thuonghieu[]" id="<?php echo $v['manu_name']?>" value="<?php
-                                    
-                                    echo $v['manu_name'];
-                                    
-                                     ?>">
-                                <label for="<?php echo $v['manu_name'] ?>">
-                                    <span></span>
-                                    <?php echo $v['manu_name'] ?>
-                                    <?php
-										$a = 0;
-									 	foreach($searchProducts as $i):
-										if($v['manu_id'] == $i['menu_id']):
-                                            
-                                            foreach($e as $value):
-                                                if( $i['type_id'] == $value ):
-											$a++; ?>
-                                    <?php  endif; endforeach;  endif; endforeach; ?>
-                                    <small><?php echo '( ' .$a.' )' ?></small>
-
-                                </label>
-                            </div>
-                            <?php endforeach; ?>
-                            <button type="submit" class="custom-btn btn-8"><span>Confirm</span></button>
-                        </form>
-                    </div>
-                </div>
+             
                 <!-- /aside Widget -->
 
                 <!-- aside Widget -->
@@ -192,7 +160,7 @@ include 'header.php' ?>
                         <?php if($_GET['pages'] > 1):
                             $prev_page = $_GET['pages'] - 1; ?>
                         <li><a
-                                href='result?type_prd=<?php echo $_GET['type_prd'] ?>&&keyword=<?php echo $_GET['keyword'] ?>&&pages=<?php echo $prev_page ?>'><i
+                                href='result.php?type_prd=<?php echo $_GET['type_prd'] ?>&&keyword=<?php echo $_GET['keyword'] ?>&&pages=<?php echo $prev_page ?>'><i
                                     class="fa fa-angle-left"></i></a></li>
                         <?php endif; ?>
 
@@ -201,7 +169,7 @@ include 'header.php' ?>
                         <?php if($_GET['pages'] < $totalLinks - 1):
                                 $next_page = $_GET['pages'] + 1 ?>
                         <li><a
-                                href='result?type_prd=<?php echo $_GET['type_prd'] ?>&&keyword=<?php echo $_GET['keyword']  ?>&&pages=<?php echo $next_page  ?>'><i
+                                href='result.php?type_prd=<?php echo $_GET['type_prd'] ?>&&keyword=<?php echo $_GET['keyword']  ?>&&pages=<?php echo $next_page  ?>'><i
                                     class="fa fa-angle-right"></i></a></li>
                         <?php endif; ?>
                     </ul>
