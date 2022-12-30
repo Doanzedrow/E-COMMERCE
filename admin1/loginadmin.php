@@ -1,7 +1,7 @@
 <?php session_start();
 require "../Config/database.php";
 require "../app/models/db.php"; 
-require "../admin/app/models/admin.php";
+require "../admin1/app/models/admin.php";
 $admin = new Admin;
 $loi = "";
 $check = true;
@@ -12,7 +12,7 @@ if(isset($_POST['btn-dangnhap']))
     if($admin->checkLogin($username,$password))
     {
         $_SESSION['admin'] = $username;
-        header('location:../admin/index.php');
+        header('location:../admin1/index.php');
     }
     else
     {

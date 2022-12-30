@@ -81,7 +81,7 @@ if(isset($_POST['btn-dangnhap']))
                     </div>
                 </form>
                 <div class="input-form">
-                        <p>Đăng nhập với tư cách admin <a href="../admin/loginadmin.php">Vào đây</a></p>
+                        <p>Đăng nhập với tư cách admin <a href="../admin1/loginadmin.php">Vào đây</a></p>
                     </div>
                 <!-- <h3>Đăng Nhập Bằng Mạng Xã Hội</h3>
                 <ul class="icon-dang-nhap">

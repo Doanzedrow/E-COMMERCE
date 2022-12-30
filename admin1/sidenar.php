@@ -17,7 +17,7 @@
             </div>
             <div class="info">
                 
-                    <a href="./loginadmin.php" class="d-block">Alexander Pierce</a>
+                    <a href="./logoutadmin.php" class="d-block">Alexander Pierce</a>
                                    
            </div>
         </div>
