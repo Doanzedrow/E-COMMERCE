@@ -33,5 +33,5 @@ if(isset($_POST['name']))
     $target_dir = "../img/";
     $target_file = $target_dir . basename($_FILES['image']['name']);
     move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-    header("location:products.php");
+    header("location:products.php?pages=1");
 }

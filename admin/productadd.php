@@ -1,4 +1,6 @@
-<?php include './header.php';
+<?php
+session_start();
+include './header.php';
 include './sidenar.php';
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -19,7 +21,23 @@ include './sidenar.php';
             </div>
         </div><!-- /.container-fluid -->
     </section>
+    <?php 
+    if(isset($_SESSION['error']) && !isset($_SESSION['error1'])):?>
+    
+    <script>
+        alert("Xin hãy nhập đầy đủ thông tin!!");
+    </script>
+    <?php endif; ?>
+    <?php if(isset($_SESSION['error1'])): ?>
 
+        <script>
+            alert("Nhập giá phải là số nhé!!");
+        </script>
+
+    <?php
+    endif;
+    unset($_SESSION['error']);
+    unset($_SESSION['error1']);?>
     <!-- Main content -->
     <form action="add.php" method="Post" enctype="multipart/form-data">
         <section class="content">

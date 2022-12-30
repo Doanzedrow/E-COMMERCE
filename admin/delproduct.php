@@ -6,6 +6,6 @@ $product = new Product;
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $product->delproduct($id);
-    header('location:products.php');
+    header('location:products.php?pages=1');
 }
 ?>

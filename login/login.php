@@ -5,13 +5,22 @@ require "../app/models/user.php";
 $user = new User;
 $loi = "";
 $check = true;
+$getUser = $user->getUser();
 if(isset($_POST['btn-dangnhap']))
 {
     $username = $_POST['username'];
     $password = $_POST['password'];
     if($user->checklogin($username,$password))
     {
-        $_SESSION['user'] = $username;
+        foreach($getUser as $v)
+        {
+            if($v['username'] ==  $username)
+            {
+                $_SESSION['user'] = $v['id_user'];
+                break;
+            }
+        }
+        
         header('location:../index.php');
     }
     else

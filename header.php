@@ -4,14 +4,19 @@ session_start();
 	require "./app/models/db.php";
 	require "./app/models/products.php";
 	require "./app/models/protypes.php";
+    require "./app/models/review.php";
+    require "./app/models/user.php";
 	$product = new Product;
 	$protype = new protypes;
+    $review = new review;
+    $user = new User;
 	$getAllProtypes = $protype->getAllProtypes();
 	$getAllProducts = $product->getAllProducts(); 
     $getAllTopSellingProducts = $product->getAllTopSellingProducts();
     $getAllNewProducts = $product->getAllNewProducts();	
     $get3HotTop6Products = $product->get3HotTop6Products();
     $get5TopSellingProducts = $product->get5TopSellingProducts();
+    $getu = $user->getUser();
 	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +86,13 @@ session_start();
                                 <?php 
                                     if(isset($_SESSION['user']))
                                     {
-                                        echo "Xin chào " . $_SESSION['user']; 
+                                        foreach($getu as $u)
+                                        {
+                                            if($u['id_user'] == $_SESSION['user'])
+                                            {
+                                                echo "Xin chào " . $u['username']; 
+                                            }
+                                        }
                                     }
                                     else
                                     {

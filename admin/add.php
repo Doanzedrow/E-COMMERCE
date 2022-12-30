@@ -1,4 +1,5 @@
 <?php
+session_start();
 require './Config/database.php';
 require './app/models/db.php';
 require './app/models/products.php';
@@ -6,7 +7,7 @@ $product = new Product;
 if(isset($_POST['name']))
 {
     $name = $_POST['name'];
-    $price = $_POST['price'];
+    $price = (int)$_POST['price'];
     $description = $_POST['description'];
     $image = $_FILES['image']['name'];
     $manu_id = number_format($_POST['manu_id']);
@@ -26,10 +27,23 @@ if(isset($_POST['name']))
     $hedieuhanh= $_POST['hedieuhanh'];
     $card = $_POST['card'];
     //xu ly them
-    $product->ProductById($name,$manu_id,$type_id,$price,$image,$description,$feature,$discount,$qty_sold,$kichthuocmanhinh,$chip,$ram,$rom,$pin,$dophangiai,$congketnoi,$congsuat,$hedieuhanh,$card);
-    //xu ly upload
-    $target_dir = "../img/";
-    $target_file = $target_dir . basename($_FILES['image']['name']);
-    move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
-    header("location:products.php");
+    if($price <= 0)
+    {
+        $_SESSION['error1'] = "loi";
+    }
+    if(empty($name) || empty($manu_id) || empty($type_id) || empty($image) || empty($price) && $price <= 0)
+    { 
+        $_SESSION['error'] = "loi";
+        header("location:productadd.php"); 
+    }
+    else
+    {
+        unset($_SESSION['error']);
+        unset($_SESSION['error1']);
+        $product->ProductById($name,$manu_id,$type_id,$price,$image,$description,$feature,$created_at,$discount,$qty_sold,$kichthuocmanhinh,$chip,$ram,$rom,$pin,$dophangiai,$congketnoi,$congsuat,$hedieuhanh,$card);
+        $target_dir = "../img/";
+        $target_file = $target_dir . basename($_FILES['image']['name']);
+        move_uploaded_file($_FILES['image']['tmp_name'], $target_file); 
+        header("location:productadd.php"); 
+    }
 }

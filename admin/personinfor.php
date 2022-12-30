@@ -27,6 +27,9 @@ include 'sidenar.php';
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Personinfor</h3>
+                <a class="btn btn-success btn-sm px-3 mx-3" href="./productadd.php">
+                        <i class="fas fa-plus"></i>
+                        Add</a>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>

@@ -8,6 +8,7 @@
 	}		
 	$manufactures = new Manufactures;
 	$getProductById = $product->getProductById($id); 
+    $getAllreview = $review->getAllreview();
 	?>
 
 <!-- BREADCRUMB -->
@@ -146,7 +147,24 @@
                 <ul class="tab-nav">
                     <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                     <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                    <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                    <li><a data-toggle="tab" href="#tab3">Reviews <?php
+                    $review = 0; 
+                    foreach($getAllreview as $sao)
+                    {
+                        if($sao['id_product'] == $_GET['id'])
+                        {
+                            $review++;
+                        }
+                    } 
+                    if($review > 0)
+                    {
+                        echo $review;
+                    }
+                    else
+                    {
+                        echo "";
+                    }
+                    ?></a></li>
                 </ul>
                 <!-- /product tab nav -->
                 <?php 					
@@ -413,19 +431,103 @@
                     <!-- /tab2  -->
                     <?php endforeach; ?>
                     <!-- tab3  -->
+                    <?php 
+                    $sosao = $slsao1 = $slsao2 = $slsao3 = $slsao4 = $slsao5 = $sao1 = $sao2  = $sao3 = $sao4 = $sao5 = 0; 
+                    foreach($getAllreview as $re)
+                    {
+                        if($re['id_product'] == $id):
+                            if($re['start'] == 1)
+                            {
+                                $slsao1++;
+                            }
+                            if($re['start'] == 2)
+                            {
+                                $slsao2++;
+                            }
+                            if($re['start'] == 3)
+                            {
+                                $slsao3++;
+                            }
+                            if($re['start'] == 4)
+                            {
+                                $slsao4++;
+                            }
+                            if($re['start'] == 5)
+                            {
+                                $slsao5++;
+                            }
+                        endif;
+                        
+                    }  
+                    $sosao = (float)(($slsao1 + $slsao2*2  +$slsao3*3  +$slsao4*4  +$slsao5*5 )/5);
+                    $sao1 = $slsao1/10*100;    
+                    $sao2 = $slsao2/10*100;    
+                    $sao3 = $slsao3/10*100;    
+                    $sao4 = $slsao4/10*100;    
+                    $sao5 = $slsao5/10*100;     
+                    $sa1 = $sa2=$sa3=$sa4=$sa5="";
+                                                    if($sosao >=0 && $sosao < 2)
+                                                    {
+                                                        $sa1 = "fa fa-star";
+                                                        $sa2 = "fa fa-star-o";
+                                                        $as3 = "fa fa-star-o";
+                                                        $sa4 = "fa fa-star-o";
+                                                        $sa5 = "fa fa-star-o";
+                                                    } 
+                                                    else if($sosao >=2 && $sosao < 3)
+                                                    {
+                                                        $sa1 = "fa fa-star";
+                                                        $sa2 = "fa fa-star";
+                                                        $sa3 = "fa fa-star-o";
+                                                        $sa4 = "fa fa-star-o";
+                                                        $sa5 = "fa fa-star-o";
+                                                    }
+                                                    else if($sosao >=3 && $sosao < 4)
+                                                    {
+                                                        $sa1 = "fa fa-star";
+                                                        $sa2 = "fa fa-star";
+                                                        $sa3 = "fa fa-star";
+                                                        $sa4 = "fa fa-star-o";
+                                                        $sa5 = "fa fa-star-o";
+                                                    }
+                                                    else if($sosao >=4 && $sosao < 5)
+                                                    {
+                                                        $sa1 = "fa fa-star";
+                                                        $sa2 = "fa fa-star";
+                                                        $sa3 = "fa fa-star";
+                                                        $sa4 = "fa fa-star";
+                                                        $sa5 = "fa fa-star-o";
+                                                    }
+                                                    else if($sosao >=5 && $sosao < 6)
+                                                    {
+                                                        $sa1 = "fa fa-star";
+                                                        $sa2 = "fa fa-star";
+                                                        $sa3 = "fa fa-star";
+                                                        $sa4 = "fa fa-star";
+                                                        $sa5 = "fa fa-star";
+                                                    }    
+                                                    else
+                                                    {
+                                                        $sa1 = "fa fa-star-o";
+                                                        $sa1 = "fa fa-star-o";
+                                                        $sa1 = "fa fa-star-o";
+                                                        $sa1 = "fa fa-star-o";
+                                                        $sa1 = "fa fa-star-o";
+                                                    }                                                             
+                    ?>
                     <div id="tab3" class="tab-pane fade in">
                         <div class="row">
                             <!-- Rating -->
                             <div class="col-md-3">
                                 <div id="rating">
                                     <div class="rating-avg">
-                                        <span>4.5</span>
+                                        <span><?php echo $sosao ?></span>
                                         <div class="rating-stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
+                                            <i class="<?php echo $sa1 ?>"></i>
+                                            <i class="<?php echo $sa2 ?>"></i>
+                                            <i class="<?php echo $sa3 ?>"></i>
+                                            <i class="<?php echo $sa4 ?>"></i>
+                                            <i class="<?php echo $sa5 ?>"></i>
                                         </div>
                                     </div>
                                     <ul class="rating">
@@ -438,9 +540,9 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="rating-progress">
-                                                <div style="width: 80%;"></div>
+                                                <div style="width: <?php echo $sao5 ?>%;"></div>
                                             </div>
-                                            <span class="sum">3</span>
+                                            <span class="sum"><?php echo $slsao5 ?></span>
                                         </li>
                                         <li>
                                             <div class="rating-stars">
@@ -451,9 +553,9 @@
                                                 <i class="fa fa-star-o"></i>
                                             </div>
                                             <div class="rating-progress">
-                                                <div style="width: 60%;"></div>
+                                                <div style="width: <?php echo $sao4 ?>%;"></div>
                                             </div>
-                                            <span class="sum">2</span>
+                                            <span class="sum"><?php echo $slsao4 ?></span>
                                         </li>
                                         <li>
                                             <div class="rating-stars">
@@ -464,9 +566,9 @@
                                                 <i class="fa fa-star-o"></i>
                                             </div>
                                             <div class="rating-progress">
-                                                <div></div>
+                                                <div style="width: <?php echo $sao3 ?>%;"></div>
                                             </div>
-                                            <span class="sum">0</span>
+                                            <span class="sum"><?php echo $slsao3 ?></span>
                                         </li>
                                         <li>
                                             <div class="rating-stars">
@@ -477,9 +579,9 @@
                                                 <i class="fa fa-star-o"></i>
                                             </div>
                                             <div class="rating-progress">
-                                                <div></div>
+                                                <div style="width: <?php echo $sao2 ?>%;"></div>
                                             </div>
-                                            <span class="sum">0</span>
+                                            <span class="sum"><?php echo $slsao2 ?></span>
                                         </li>
                                         <li>
                                             <div class="rating-stars">
@@ -490,9 +592,9 @@
                                                 <i class="fa fa-star-o"></i>
                                             </div>
                                             <div class="rating-progress">
-                                                <div></div>
+                                                <div style="width: <?php echo $sao1 ?>%;"></div>
                                             </div>
-                                            <span class="sum">0</span>
+                                            <span class="sum"><?php echo $slsao1 ?></span>
                                         </li>
                                     </ul>
                                 </div>
@@ -503,68 +605,87 @@
                             <div class="col-md-6">
                                 <div id="reviews">
                                     <ul class="reviews">
+                                        <?php foreach($getAllreview as $re): 
+                                            if($re['id_product'] == $id):
+                                            ?>
+                                            
                                         <li>
                                             <div class="review-heading">
-                                                <h5 class="name">John</h5>
-                                                <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                <h5 class="name"><?php echo $re['username'] ?></h5>
+                                                <p class="date"><?php echo $re['created_at'] ?></p>
                                                 <div class="review-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o empty"></i>
+                                                    <?php
+                                                    $s1 = $s2=$s3=$s4=$s5="";
+                                                    if($re['start'] == 1)
+                                                    {
+                                                        $s1 = "fa fa-star";
+                                                        $s2 = "fa fa-star-o";
+                                                        $s3 = "fa fa-star-o";
+                                                        $s4 = "fa fa-star-o";
+                                                        $s5 = "fa fa-star-o";
+                                                    } 
+                                                    else if($re['start'] == 2)
+                                                    {
+                                                        $s1 = "fa fa-star";
+                                                        $s2 = "fa fa-star";
+                                                        $s3 = "fa fa-star-o";
+                                                        $s4 = "fa fa-star-o";
+                                                        $s5 = "fa fa-star-o";
+                                                    }
+                                                    else if($re['start'] == 3)
+                                                    {
+                                                        $s1 = "fa fa-star";
+                                                        $s2 = "fa fa-star";
+                                                        $s3 = "fa fa-star";
+                                                        $s4 = "fa fa-star-o";
+                                                        $s5 = "fa fa-star-o";
+                                                    }
+                                                    else if($re['start'] == 4)
+                                                    {
+                                                        $s1 = "fa fa-star";
+                                                        $s2 = "fa fa-star";
+                                                        $s3 = "fa fa-star";
+                                                        $s4 = "fa fa-star";
+                                                        $s5 = "fa fa-star-o";
+                                                    }
+                                                    else if($re['start'] == 5)
+                                                    {
+                                                        $s1 = "fa fa-star";
+                                                        $s2 = "fa fa-star";
+                                                        $s3 = "fa fa-star";
+                                                        $s4 = "fa fa-star";
+                                                        $s5 = "fa fa-star";
+                                                    }  
+                                                    else
+                                                    {
+                                                        $s1 = "fa fa-star-0";
+                                                        $s2 = "fa fa-star-o";
+                                                        $s3 = "fa fa-star-o";
+                                                        $s4 = "fa fa-star-o";
+                                                        $s5 = "fa fa-star-o";
+                                                    }                                                                                                                                                                                           
+                                                    ?>
+                                                    <i class="<?php echo $s1; ?>"></i>
+                                                    <i class="<?php echo $s2; ?>"></i>
+                                                    <i class="<?php echo $s3; ?>"></i>
+                                                    <i class="<?php echo $s4; ?>"></i>
+                                                    <i class="<?php echo $s5; ?>"></i>
                                                 </div>
                                             </div>
                                             <div class="review-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                                    do eiusmod tempor incididunt ut labore et dolore magna
-                                                    aliqua</p>
+                                                <p><?php echo $re['coment'] ?></p>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="review-heading">
-                                                <h5 class="name">John</h5>
-                                                <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o empty"></i>
-                                                </div>
-                                            </div>
-                                            <div class="review-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                                    do eiusmod tempor incididunt ut labore et dolore magna
-                                                    aliqua</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="review-heading">
-                                                <h5 class="name">John</h5>
-                                                <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o empty"></i>
-                                                </div>
-                                            </div>
-                                            <div class="review-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                                    do eiusmod tempor incididunt ut labore et dolore magna
-                                                    aliqua</p>
-                                            </div>
-                                        </li>
+                                        <?php endif;  endforeach; ?>
+
                                     </ul>
-                                    <ul class="reviews-pagination">
+                                    <!-- <ul class="reviews-pagination">
                                         <li class="active">1</li>
                                         <li><a href="#">2</a></li>
                                         <li><a href="#">3</a></li>
                                         <li><a href="#">4</a></li>
                                         <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </div>
                             <!-- /Reviews -->
@@ -572,10 +693,9 @@
                             <!-- Review Form -->
                             <div class="col-md-3">
                                 <div id="review-form">
-                                    <form class="review-form">
-                                        <input class="input" type="text" placeholder="Your Name">
-                                        <input class="input" type="email" placeholder="Your Email">
-                                        <textarea class="input" placeholder="Your Review"></textarea>
+                                    <form action="insertreview.php?id=<?php echo $_GET['id']?>&&id_user=<?php  ?>"
+                                        class="review-form" method="post">
+                                        <textarea class="input" name="coment" placeholder="Your Review"></textarea>
                                         <div class="input-rating">
                                             <span>Your Rating: </span>
                                             <div class="stars">

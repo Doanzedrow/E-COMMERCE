@@ -117,16 +117,16 @@
                             <?php
                         $url = $_SERVER['PHP_SELF'];
                         $pages = $_GET['pages'];
-                        $perPage = 4;
-                        $getAllProducts = $product->getAllProducts($pages,$perPage); 
+                        $perPage = 4;                       
+                        $getsearchProducts = $product->getsearchProducts($pages,$perPage,$_GET['keyword']); 
+                        $getsearch = $product->getsearch($pages,$perPage,$_GET['keyword']); 
                         $total = 0;
-                        foreach($getAllProducts as $v){     
+                        foreach($getsearch as $v){     
                              $total++;
-                        }                                                        
+                        }                                                  
                         $totalLinks = ceil($total/$perPage);          
-                        $getProducts = $product->getProducts($pages,$perPage);
-                        $paginate = $product->paginate($url,$total,$pages,$perPage,1);
-                        foreach($getProducts as $value):
+                        $paginateOfSearch = $product->paginateOfSearch($url,$total,$pages,$perPage,1,$_GET['keyword']);
+                        foreach($getsearchProducts as $value):
                         
                         ?>
                             <tr>
@@ -212,15 +212,15 @@
                     <ul class="store-pagination">
                         <?php if($_GET['pages'] > 1):
                             $prev_page = $_GET['pages'] - 1; ?>
-                        <li><a href='products.php?pages=<?php echo $prev_page ?>'><i class="fa fa-angle-left"></i></a>
+                        <li><a href='searchproduct.php?keyword=<?php echo $_GET['keyword'] ?>pages=<?php echo $prev_page ?>'><i class="fa fa-angle-left"></i></a>
                         </li>
                         <?php endif; ?>
 
-                        <?php echo $paginate; ?>
-
+                        <?php echo $paginateOfSearch;?>
+                            
                         <?php if($_GET['pages'] < $totalLinks - 1):
                                 $next_page = $_GET['pages'] + 1 ?>
-                        <li><a href='products.php?pages=<?php echo $next_page  ?>'><i class="fa fa-angle-right"></i></a>
+                        <li><a href='searchproduct.php?keyword=<?php echo $_GET['keyword'] ?>?pages=<?php echo $next_page  ?>'><i class="fa fa-angle-right"></i></a>
                         </li>
                         <?php endif; ?>
                     </ul>

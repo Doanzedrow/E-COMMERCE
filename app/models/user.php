@@ -11,8 +11,8 @@ class User extends Db
     }
     public function getIdUser ($name_user)
     {
-        $sql = self::$connection->prepare("SELECT * FROM user where `username` = ?");
-        $sql->bind_param('s',$name_user);
+        $sql = self::$connection->prepare("SELECT * FROM user where `id_user` = ?");
+        $sql->bind_param('i',$name_user);
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

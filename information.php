@@ -1,9 +1,9 @@
 <?php
  include 'header.php' ?>
 <?php 
-require "./app/models/user.php";
+
 require "./app/models/Personinfor.php";
-$user = new User;
+
 if (isset($_SESSION['user']))
 {
     $getidUser = $user->getIdUser($_SESSION['user']);
@@ -81,7 +81,7 @@ $personinfor = new Personinfor;
 			 ?>
 		</div>
 	</div>
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col">
 		<div class="total-price">
 				<table>
@@ -92,6 +92,6 @@ $personinfor = new Personinfor;
 				</table>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>
 <?php include 'footer.php' ?>
