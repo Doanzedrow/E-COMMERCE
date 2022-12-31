@@ -19,7 +19,7 @@
 			<!-- /container -->
 		</div>
 		<!-- /BREADCRUMB -->
-		<?php echo "Đặt hàng thành công!!"; ?>
+		<h1 style="text-align:center; color: blue;">Đặt hàng thành công  </h1>
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->

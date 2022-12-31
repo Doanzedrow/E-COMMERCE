@@ -1,5 +1,7 @@
 <?php
- include 'header.php' ?>
+ include 'header.php' ;
+ 
+ ?>
 <!-- BREADCRUMB -->
 <div id="breadcrumb" class="section">
     <!-- container -->
@@ -19,7 +21,16 @@
     <!-- /container -->
 </div>
 <!-- /BREADCRUMB -->
-
+<?php 
+    if(isset($_SESSION['erroruser'])):?>
+    
+    <script>
+        alert("Xin hãy nhập đầy đủ thông tin!!");
+    </script>
+    <?php endif; 
+    unset($_SESSION['erroruser']);
+    ?>
+    
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -83,8 +94,9 @@
                         <div><strong>PRODUCT</strong></div>
                         <div><strong>TOTAL</strong></div>
                     </div>
-
+                    <?php if(isset($_SESSION['cart'])): ?>
                     <div class="order-products">
+                       
                         <?php foreach($_SESSION['cart'] as $k => $value):
 								foreach($getAllProducts as $p):
 									if($p['id' ]== $k):
@@ -98,11 +110,13 @@
                         </div>
                         <?php endif; endforeach; endforeach; ?>
                     </div>
+                    <?php endif; ?>
                     <div class="order-col">
                         <div>Shiping</div>
                         <div><strong>FREE</strong></div>
                     </div>
                     <div class="order-col">
+                        <?php if(isset($_SESSION['cart'])): ?>
                         <div><strong>TOTAL</strong></div>
                         <?php                                                                             
                                         $price = 0;
@@ -114,50 +128,10 @@
                         <?php endif; endforeach; endforeach;  ?>
                         <div><strong class="order-total"
                                 style="font-size: 20px;"><?php echo  number_format($price) . " ₫"; ?></strong></div>
+                                <?php endif; ?>
                     </div>
                 </div>
-                <div class="payment-method">
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-1">
-                        <label for="payment-1">
-                            <span></span>
-                            Direct Bank Transfer
-                        </label>
-                        <div class="caption">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-2">
-                        <label for="payment-2">
-                            <span></span>
-                            Cheque Payment
-                        </label>
-                        <div class="caption">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-3">
-                        <label for="payment-3">
-                            <span></span>
-                            Paypal System
-                        </label>
-                        <div class="caption">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-checkbox">
-                    <input type="checkbox" id="terms">
-                    <label for="terms">
-                        <span></span>
-                        I've read and accept the <a href="#">terms & conditions</a>
-                    </label>
-                </div>
+                
 				<input type="submit" class="primary-btn order-submit" value="Place order" name="btn-oder" style="margin-left: 130px;">
             </div>
             <!-- /Order Details -->

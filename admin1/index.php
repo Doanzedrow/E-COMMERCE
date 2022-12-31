@@ -618,6 +618,7 @@ if(isset($_SESSION['admin'])): ?>
 if(!isset($_SESSION['admin']))
 {
   echo "<h1 style='width:1111px;  height: 40px; text-align: center;'>ERROR 404</h1>";
+  header('location:loginadmin.php');
 }
 ?>
 

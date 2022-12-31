@@ -102,9 +102,9 @@ session_start();
                             </a>
                             <div class="noidung_dropdown">
                                 <?php if(isset($_SESSION['user'])): ?>  
-                                <a href="./information.php?id_user= <?php echo $_SESSION['user']; ?>">Information</a>                              
-                                <a href="./logout/logout.php">Logout</a>     
-                                                       
+                                <a href="./information.php?id_user= <?php echo $_SESSION['user']; ?>">Information</a>    
+                                <a href="./logout/logout.php">Logout</a>                             
+                                <a href="./oder.php?id_user=<?php echo $_SESSION['user']; ?>">Purchase order</a>                                                 
                                <?php else: ?>
                                     <a href="./login/login.php">Login</a>                                 
                                 <?php  endif;?>                                                                
